@@ -1,4 +1,26 @@
 # Python Cheat Sheet
+# Dont actually run file, just use as reference
+
+# Print
+print("Hello World")
+print(variable)
+print("Hello World", variable)
+
+
+# Input
+input = input("Enter a value: ")
+input = int(input("Enter a value: "))
+input = float(input("Enter a value: "))
+input = bool(input("Enter a value: "))
+input = str(input("Enter a value: "))
+input = list(input("Enter a value: "))
+input = dict(input("Enter a value: "))
+input = tuple(input("Enter a value: "))
+input = set(input("Enter a value: "))
+input = eval(input("Enter a value: "))
+input = open(input("Enter a value: "))
+input = print(input("Enter a value: "))
+
 
 # Variable:
 variable = 1 # Integer variable
