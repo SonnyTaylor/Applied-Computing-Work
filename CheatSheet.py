@@ -7,7 +7,7 @@ print(variable)
 print("Hello World", variable)
 
 
-# Input
+# Input and their input types
 input = input("Enter a value: ")
 input = int(input("Enter a value: "))
 input = float(input("Enter a value: "))
@@ -22,7 +22,14 @@ input = open(input("Enter a value: "))
 input = print(input("Enter a value: "))
 
 
-# Variable:
+# Naming Conventions:
+snake_case = 1
+camelCase = 1
+PascalCase = 1
+UPPERCASECONSTANT = 1
+
+
+# Variable and variable types:
 variable = 1 # Integer variable
 variable = 1.0 # Float variable
 variable = "1" # String variable
@@ -117,9 +124,3 @@ import random
 random.random()
 random.randint(1, 10)
 random.choice([1, 2, 3, 4, 5])
-
-
-# Datetime:
-import datetime
-datetime.datetime.now()
-datetime.datetime(2024, 1, 1)
