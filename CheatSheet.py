@@ -7,6 +7,14 @@ print(variable)
 print("Hello World", variable)
 
 
+# Comments
+# This is a comment
+"""
+This is a multiline
+comment
+"""
+
+
 # Input and their input types
 input = input("Enter a value: ")
 input = int(input("Enter a value: "))
