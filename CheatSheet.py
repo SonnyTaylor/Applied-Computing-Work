@@ -56,6 +56,12 @@ else:
 # Loop:
 for i in range(10):
     print(i)
+while variable == 1:
+    print("Variable is equal to 1")
+    variable = 2
+    break
+else:
+    print("Variable is not equal to 1")
     
     
 # Function:
