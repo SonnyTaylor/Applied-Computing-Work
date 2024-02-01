@@ -20,6 +20,6 @@ grocery_list.sort()
 
 print("this is the sorted grocery list:", grocery_list)
 
-# Itterate through array with a for loop
+# Iterate through array with a for loop
 for each in grocery_list:
     print(each)
