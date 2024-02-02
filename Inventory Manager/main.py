@@ -3,6 +3,7 @@
 
 # OS import used for clearing the terminal
 import os
+import time
 
 # Initialize store_inventory dictionary with a few items for an example
 store_inventory = {
@@ -68,6 +69,7 @@ def user_options(clear_term_on_startup):
         exit()
     else:
         print(TRED + "Invalid input. Please try again." + TWHITE)
+        user_options(True)
 
 
 def view_inventory():
@@ -80,7 +82,7 @@ def view_inventory():
         quantity = details["quantity"]
         price = details["price"]
         print(f"{item}: Quantity: {quantity}, Price: {price}")
-        print("-------------------------------")
+        print(TBLUE + "-------------------------------" + TWHITE)
     view_inventory_finished = input("Press enter to continue")
     if view_inventory_finished == "":
         # return to the options
@@ -94,18 +96,36 @@ def add_inventory():
     clear_terminal()
     print("What would you like to add?")
     item = input("Enter item> ")
+    if not item:
+        print("Item cannot be empty.")
+        time.sleep(1)
+        add_inventory()
+        return
+
     print("How many would you like to add?")
-    quantity = int(input("Enter quantity> "))
+    quantity = input("Enter quantity> ")
+    if not quantity.isdigit():
+        print("Quantity must be a positive integer.")
+        time.sleep(1)
+        add_inventory()
+        return
+    quantity = int(quantity)
+
     print("What is the price of the item?")
-    price = float(input("Enter price> "))
-    # if the price is not a float, convert it to a float
-    if not isinstance(price, float):
+    price = input("Enter price> ")
+    try:
         price = float(price)
+    except ValueError:
+        print("Price must be a number.")
+        time.sleep(1)
+        add_inventory()
+        return
 
     # add the item to the inventory
     store_inventory[item] = {"quantity": quantity, "price": price}
     print(f"{quantity} {item} added to inventory")
     print("-------------------------------")
+    time.sleep(1)
     user_options(True)
 
 
@@ -174,6 +194,10 @@ def remove_inventory():
     store_inventory.pop(item, None)
     print(f"{item} removed from inventory")
     print("-------------------------------")
+    view_inventory_finished = input("Press enter to continue")
+    if view_inventory_finished == "":
+        # return to the options
+        user_options(True)
 
     # return to options
     user_options(True)
@@ -184,4 +208,7 @@ print(TGREEN + epic_logo_i_definintly_made_myself_lol + TWHITE)
 
 # start the program
 if __name__ == "__main__":
-    user_options(False)
+    try:
+        user_options(False)
+    except KeyboardInterrupt:
+        print("\nProgram interrupted. Exiting...")
