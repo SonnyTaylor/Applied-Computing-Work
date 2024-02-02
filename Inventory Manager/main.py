@@ -11,6 +11,8 @@ store_inventory = {
 # Define terminal colors
 # TODO Make the logo green
 TGREEN = '\033[32m' 
+TWHITE = '\033[37m'
+TBLUE = '\033[34m'
 
 epic_logo_i_definintly_made_myself_lol = """
     ____                      __                      __  ___                                 
@@ -18,7 +20,7 @@ epic_logo_i_definintly_made_myself_lol = """
    / // __ \ | / / _ \/ __ \/ __/ __ \/ ___/ / / /  / /|_/ / __ `/ __ \/ __ `/ __ `/ _ \/ ___/
  _/ // / / / |/ /  __/ / / / /_/ /_/ / /  / /_/ /  / /  / / /_/ / / / / /_/ / /_/ /  __/ /    
 /___/_/ /_/|___/\___/_/ /_/\__/\____/_/   \__, /  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/_/     
-                                         /____/                            /____/
+By Sonny Taylor                          /____/                            /____/
 ---------------------------------------------------------------------------------------------
 """
 
@@ -39,7 +41,9 @@ def user_options(clear_term):
     """
     if clear_term == True:
         clear_terminal()
-    print("What would you like to do?")
+        # ! I think theres a problem with this if statement or something cause like things dont work no more
+        # continue with function
+    print(TBLUE + "What would you like to do?" + TWHITE)
     print("1. View inventory")
     print("2. Add to inventory")
     print("3. Remove from inventory")
@@ -71,7 +75,9 @@ def view_inventory():
         price = details["price"]
         print(f"{item}: Quantity: {quantity}, Price: {price}")
         print("-------------------------------")
-    user_options(True)
+    view_inventory_finished = input("Press enter to continue")
+    if view_inventory_finished == "":
+        user_options(True)
 
 def add_inventory():
     """
@@ -120,6 +126,5 @@ def remove_inventory():
     user_options(True)
 
 # print starting message and ask user what they want to do
-print("Welcome to the generic store Inventory Manager!")
-print(epic_logo_i_definintly_made_myself_lol)
+print(TGREEN + epic_logo_i_definintly_made_myself_lol + TWHITE)
 user_options(False)
