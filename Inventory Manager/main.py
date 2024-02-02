@@ -89,7 +89,6 @@ def view_inventory():
         user_options(True)
 
 
-# Define the function to add an item to the inventory
 def add_inventory():
     """
     Adds a new item, its quantity, and price to the inventory.
