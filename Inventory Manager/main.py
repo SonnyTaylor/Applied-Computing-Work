@@ -110,5 +110,5 @@ def remove_inventory():
 
 # Ask user what they want to do
 print("Welcome to the generic store Inventory Manager!")
-epic_logo_i_definintly_made_myself_lol()
+print(epic_logo_i_definintly_made_myself_lol)
 user_options()
