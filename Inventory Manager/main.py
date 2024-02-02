@@ -9,12 +9,13 @@ store_inventory = {
 }
 
 # Define terminal colors
-TGREEN = '\033[32m' 
-TWHITE = '\033[37m'
-TBLUE = '\033[34m'
-TRED = '\033[31m'
+TGREEN = "\033[32m"
+TWHITE = "\033[37m"
+TBLUE = "\033[34m"
+TRED = "\033[31m"
 
 # Logo used upon opening the program
+# make the logo raw dog so that theres no errors
 epic_logo_i_definintly_made_myself_lol = r"""
     ____                      __                      __  ___                                 
    /  _/___ _   _____  ____  / /_____  _______  __   /  |/  /___ _____  ____ _____ ____  _____
@@ -25,6 +26,7 @@ By Sonny Taylor                          /____/                            /____
 ---------------------------------------------------------------------------------------------
 """
 
+
 def clear_terminal():
     """
     Clears the terminal screen.
@@ -33,6 +35,7 @@ def clear_terminal():
         os.system("cls")
     else:  # Linux or macOS
         os.system("clear")
+
 
 def user_options(clear_term):
     """Clears the terminal of everthing creating a blank terminal
@@ -63,6 +66,7 @@ def user_options(clear_term):
     else:
         print(TRED + "Invalid input. Please try again." + TWHITE)
 
+
 def view_inventory():
     """
     Displays the current inventory items, their quantities, and prices.
@@ -79,6 +83,7 @@ def view_inventory():
         # return to the options
         user_options(True)
 
+
 def add_inventory():
     """
     Adds a new item, its quantity, and price to the inventory.
@@ -93,12 +98,13 @@ def add_inventory():
     # if the price is not a float, convert it to a float
     if not isinstance(price, float):
         price = float(price)
-    
+
     # add the item to the inventory
     store_inventory[item] = {"quantity": quantity, "price": price}
     print(f"{quantity} {item} added to inventory")
     print("-------------------------------")
     user_options(True)
+
 
 def edit_inventory():
     """Allows the user to edit the quantity and/or price of an item in the inventory."""
@@ -127,7 +133,7 @@ def edit_inventory():
     # if the price is not a float, convert it to a float
     if not isinstance(price, float):
         price = float(price)
-        
+
     # update the item in the inventory
     store_inventory[item]["quantity"] = quantity
     store_inventory[item]["price"] = price
@@ -137,6 +143,7 @@ def edit_inventory():
     # return to the options
     user_options(True)
 
+
 def remove_inventory():
     """
     Removes an item from inventory
@@ -144,7 +151,7 @@ def remove_inventory():
     clear_terminal()
     print("What would you like to remove?")
     item = input("Enter item> ")
-    
+
     # Check if item is in inventory
     if item not in store_inventory:
         print(f"{item} does not exist in the inventory.")
@@ -153,14 +160,15 @@ def remove_inventory():
         if item_dont_exist == "":
             remove_inventory()
         return
-    
+
     # delete item from inventory
     store_inventory.pop(item, None)
     print(f"{item} removed from inventory")
     print("-------------------------------")
-    
+
     # return to options
     user_options(True)
+
 
 # print starting message
 print(TGREEN + epic_logo_i_definintly_made_myself_lol + TWHITE)
