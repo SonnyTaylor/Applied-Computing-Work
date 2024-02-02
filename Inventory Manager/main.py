@@ -1,6 +1,5 @@
 # OS import used for clearing the terminal
 import os
-from re import T
 
 # Initialize store_inventory dictionary with a few items
 store_inventory = {
