@@ -15,6 +15,7 @@ TWHITE = '\033[37m'
 TBLUE = '\033[34m'
 TRED = '\033[31m'
 
+# Logo used upon opening the program
 epic_logo_i_definintly_made_myself_lol = r"""
     ____                      __                      __  ___                                 
    /  _/___ _   _____  ____  / /_____  _______  __   /  |/  /___ _____  ____ _____ ____  _____
@@ -124,6 +125,9 @@ def remove_inventory():
     print("-------------------------------")
     user_options(True)
 
-# print starting message and ask user what they want to do
+# print starting message
 print(TGREEN + epic_logo_i_definintly_made_myself_lol + TWHITE)
-user_options(False)
+
+# start the program
+if __name__ == "__main__":
+    user_options(False)
