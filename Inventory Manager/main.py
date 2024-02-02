@@ -76,6 +76,7 @@ def view_inventory():
         print("-------------------------------")
     view_inventory_finished = input("Press enter to continue")
     if view_inventory_finished == "":
+        # return to the options
         user_options(True)
 
 def add_inventory():
@@ -86,9 +87,14 @@ def add_inventory():
     print("What would you like to add?")
     item = input("Enter item> ")
     print("How many would you like to add?")
-    quantity = input("Enter quantity> ")
+    quantity = int(input("Enter quantity> "))
     print("What is the price of the item?")
-    price = input("Enter price> ")
+    price = float(input("Enter price> "))
+    # if the price is not a float, convert it to a float
+    if not isinstance(price, float):
+        price = float(price)
+    
+    # add the item to the inventory
     store_inventory[item] = {"quantity": quantity, "price": price}
     print(f"{quantity} {item} added to inventory")
     print("-------------------------------")
@@ -105,6 +111,7 @@ def edit_inventory():
     print("What would you like to edit?")
     item = input("Enter item> ")
 
+    # Check if item is in inventory
     if item not in store_inventory:
         print(f"{item} does not exist in the inventory.")
         print("-------------------------------")
@@ -114,28 +121,45 @@ def edit_inventory():
         return
 
     print("What is the new quantity?")
-    quantity = input("Enter quantity> ")
+    quantity = int(input("Enter quantity> "))
     print("What is the new price?")
-    price = input("Enter price> ")
+    price = float(input("Enter price> "))
+    # if the price is not a float, convert it to a float
+    if not isinstance(price, float):
+        price = float(price)
+        
+    # update the item in the inventory
     store_inventory[item]["quantity"] = quantity
     store_inventory[item]["price"] = price
     print(f"{item} quantity updated to {quantity}")
     print(f"{item} price updated to {price}")
     print("-------------------------------")
+    # return to the options
     user_options(True)
 
 def remove_inventory():
     """
-    Removes a specified quantity of an item from the inventory.
+    Removes an item from inventory
     """
     clear_terminal()
     print("What would you like to remove?")
     item = input("Enter item> ")
-    print("How many would you like to remove?")
-    quantity = input("Enter quantity> ")
-    store_inventory[item] = quantity
-    print(f"{quantity} {item} removed from inventory")
+    
+    # Check if item is in inventory
+    if item not in store_inventory:
+        print(f"{item} does not exist in the inventory.")
+        print("-------------------------------")
+        item_dont_exist = input("Press enter to continue")
+        if item_dont_exist == "":
+            remove_inventory()
+        return
+    
+    # delete item from inventory
+    store_inventory.pop(item, None)
+    print(f"{item} removed from inventory")
     print("-------------------------------")
+    
+    # return to options
     user_options(True)
 
 # print starting message
