@@ -8,7 +8,7 @@ store_inventory = {
     "Oranges": {"quantity": 32, "price": 1.5},
 }
 
-# Define terminal colors
+# Define terminal colors constants
 TGREEN = "\033[32m"
 TWHITE = "\033[37m"
 TBLUE = "\033[34m"
