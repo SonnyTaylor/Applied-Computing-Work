@@ -41,8 +41,6 @@ def user_options(clear_term):
     """
     if clear_term == True:
         clear_terminal()
-        # ! I think theres a problem with this if statement or something cause like things dont work no more
-        # continue with function
     print(TBLUE + "What would you like to do?" + TWHITE)
     print("1. View inventory")
     print("2. Add to inventory")
