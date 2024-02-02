@@ -8,13 +8,17 @@ store_inventory = {
     "Oranges": {"quantity": 32, "price": 1.5},
 }
 
+# Define terminal colors
+# TODO Make the logo green
+TGREEN = '\033[32m' 
+
 epic_logo_i_definintly_made_myself_lol = """
     ____                      __                      __  ___                                 
    /  _/___ _   _____  ____  / /_____  _______  __   /  |/  /___ _____  ____ _____ ____  _____
    / // __ \ | / / _ \/ __ \/ __/ __ \/ ___/ / / /  / /|_/ / __ `/ __ \/ __ `/ __ `/ _ \/ ___/
  _/ // / / / |/ /  __/ / / / /_/ /_/ / /  / /_/ /  / /  / / /_/ / / / / /_/ / /_/ /  __/ /    
 /___/_/ /_/|___/\___/_/ /_/\__/\____/_/   \__, /  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/_/     
-                                         /____/                            /____/     
+                                         /____/                            /____/
 ---------------------------------------------------------------------------------------------
 """
 
@@ -27,10 +31,14 @@ def clear_terminal():
     else:  # Linux or macOS
         os.system("clear")
 
-def user_options():
+def user_options(clear_term):
+    """Clears the terminal of everthing creating a blank terminal
+
+    Args:
+        clear_term (boolean): If true, clear the terminal upon being called, if false pass
     """
-    Displays the available options to the user and performs the selected action.
-    """
+    if clear_term == True:
+        clear_terminal()
     print("What would you like to do?")
     print("1. View inventory")
     print("2. Add to inventory")
@@ -63,12 +71,13 @@ def view_inventory():
         price = details["price"]
         print(f"{item}: Quantity: {quantity}, Price: {price}")
         print("-------------------------------")
-    user_options()
+    user_options(True)
 
 def add_inventory():
     """
     Adds a new item, its quantity, and price to the inventory.
     """
+    clear_terminal()
     print("What would you like to add?")
     item = input("Enter item> ")
     print("How many would you like to add?")
@@ -78,10 +87,11 @@ def add_inventory():
     store_inventory[item] = {"quantity": quantity, "price": price}
     print(f"{quantity} {item} added to inventory")
     print("-------------------------------")
-    user_options()
+    user_options(True)
     
 def edit_inventory():
     """Allows the user to edit the quantity and/or price of an item in the inventory."""
+    clear_terminal()
     print("What would you like to edit?")
     item = input("Enter item> ")
     print("What is the new quantity?")
@@ -93,12 +103,13 @@ def edit_inventory():
     print(f"{item} quantity updated to {quantity}")
     print(f"{item} price updated to {price}")
     print("-------------------------------")
-    user_options()
+    user_options(True)
 
 def remove_inventory():
     """
     Removes a specified quantity of an item from the inventory.
     """
+    clear_terminal()
     print("What would you like to remove?")
     item = input("Enter item> ")
     print("How many would you like to remove?")
@@ -106,9 +117,9 @@ def remove_inventory():
     store_inventory[item] = quantity
     print(f"{quantity} {item} removed from inventory")
     print("-------------------------------")
-    user_options()
+    user_options(True)
 
-# Ask user what they want to do
+# print starting message and ask user what they want to do
 print("Welcome to the generic store Inventory Manager!")
 print(epic_logo_i_definintly_made_myself_lol)
-user_options()
+user_options(False)
