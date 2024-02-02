@@ -3,7 +3,6 @@
 
 # OS import used for clearing the terminal
 import os
-import time
 
 # Initialize store_inventory dictionary with a few items for an example
 store_inventory = {
