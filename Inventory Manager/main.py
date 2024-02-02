@@ -37,7 +37,7 @@ def clear_terminal():
     """
     if os.name == "nt":  # Windows
         os.system("cls")
-    else:  # Linux or macOS
+    else:  # Sigma Linux or macOS
         os.system("clear")
 
 
