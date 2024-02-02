@@ -3,9 +3,9 @@ import os
 
 # Initialize store_inventory dictionary with a few items
 store_inventory = {
-    "Bananas": {"quantity": 6, "price": 0.5},
-    "Apples": {"quantity": 0, "price": 0.75},
-    "Oranges": {"quantity": 32, "price": 0.6},
+    "Bananas": {"quantity": 6, "price": 1.5},
+    "Apples": {"quantity": 0, "price": 1.00},
+    "Oranges": {"quantity": 32, "price": 1.5},
 }
 
 epic_logo_i_definintly_made_myself_lol = """
