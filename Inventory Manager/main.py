@@ -1,14 +1,17 @@
+# By Sonny Taylor for my Applied Computer class
+# find me and this git repo at https://github.com/SonnyTaylor/Applied-Computing-Work
+
 # OS import used for clearing the terminal
 import os
 
-# Initialize store_inventory dictionary with a few items
+# Initialize store_inventory dictionary with a few items for an example
 store_inventory = {
     "Bananas": {"quantity": 6, "price": 1.5},
     "Apples": {"quantity": 0, "price": 1.00},
     "Oranges": {"quantity": 32, "price": 1.5},
 }
 
-# Define terminal colors constants
+# Define terminal colors constants cause i dont wanna use a pip module for this like colorama
 TGREEN = "\033[32m"
 TWHITE = "\033[37m"
 TBLUE = "\033[34m"
