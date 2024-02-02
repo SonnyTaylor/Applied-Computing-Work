@@ -1,5 +1,6 @@
 # OS import used for clearing the terminal
 import os
+from re import T
 
 # Initialize store_inventory dictionary with a few items
 store_inventory = {
@@ -13,8 +14,9 @@ store_inventory = {
 TGREEN = '\033[32m' 
 TWHITE = '\033[37m'
 TBLUE = '\033[34m'
+TRED = '\033[31m'
 
-epic_logo_i_definintly_made_myself_lol = """
+epic_logo_i_definintly_made_myself_lol = r"""
     ____                      __                      __  ___                                 
    /  _/___ _   _____  ____  / /_____  _______  __   /  |/  /___ _____  ____ _____ ____  _____
    / // __ \ | / / _ \/ __ \/ __/ __ \/ ___/ / / /  / /|_/ / __ `/ __ \/ __ `/ __ `/ _ \/ ___/
@@ -60,7 +62,7 @@ def user_options(clear_term):
         print("Goodbye!")
         exit()
     else:
-        print("Invalid input. Please try again.")
+        print(TRED + "Invalid input. Please try again." + TWHITE)
 
 def view_inventory():
     """
