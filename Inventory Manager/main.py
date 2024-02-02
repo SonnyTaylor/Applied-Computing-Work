@@ -1,9 +1,31 @@
+# OS import used for clearing the terminal
+import os
+
 # Initialize store_inventory dictionary with a few items
 store_inventory = {
-    "Bananas": 6,
-    "Apples": 0,
-    "Oranges": 32,
+    "Bananas": {"quantity": 6, "price": 0.5},
+    "Apples": {"quantity": 0, "price": 0.75},
+    "Oranges": {"quantity": 32, "price": 0.6},
 }
+
+epic_logo_i_definintly_made_myself_lol = """
+    ____                      __                      __  ___                                 
+   /  _/___ _   _____  ____  / /_____  _______  __   /  |/  /___ _____  ____ _____ ____  _____
+   / // __ \ | / / _ \/ __ \/ __/ __ \/ ___/ / / /  / /|_/ / __ `/ __ \/ __ `/ __ `/ _ \/ ___/
+ _/ // / / / |/ /  __/ / / / /_/ /_/ / /  / /_/ /  / /  / / /_/ / / / / /_/ / /_/ /  __/ /    
+/___/_/ /_/|___/\___/_/ /_/\__/\____/_/   \__, /  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/_/     
+                                         /____/                            /____/     
+---------------------------------------------------------------------------------------------
+"""
+
+def clear_terminal():
+    """
+    Clears the terminal screen.
+    """
+    if os.name == "nt":  # Windows
+        os.system("cls")
+    else:  # Linux or macOS
+        os.system("clear")
 
 def user_options():
     """
@@ -13,7 +35,8 @@ def user_options():
     print("1. View inventory")
     print("2. Add to inventory")
     print("3. Remove from inventory")
-    print("4. Exit")
+    print("4. Edit inventory")
+    print("5. Exit")
     user_input = input("Enter number> ")
     if user_input == "1":
         view_inventory()
@@ -22,6 +45,8 @@ def user_options():
     elif user_input == "3":
         remove_inventory()
     elif user_input == "4":
+        edit_inventory()
+    elif user_input == "5":
         print("Goodbye!")
         exit()
     else:
@@ -29,21 +54,46 @@ def user_options():
 
 def view_inventory():
     """
-    Displays the current inventory items and their quantities.
+    Displays the current inventory items, their quantities, and prices.
     """
-    for item in store_inventory:
-        print(f"{item}: {store_inventory[item]}")
+    clear_terminal()
+    print("Current inventory:")
+    for item, details in store_inventory.items():
+        quantity = details["quantity"]
+        price = details["price"]
+        print(f"{item}: Quantity: {quantity}, Price: {price}")
+        print("-------------------------------")
+    user_options()
 
 def add_inventory():
     """
-    Adds a new item and its quantity to the inventory.
+    Adds a new item, its quantity, and price to the inventory.
     """
     print("What would you like to add?")
     item = input("Enter item> ")
     print("How many would you like to add?")
     quantity = input("Enter quantity> ")
-    store_inventory[item] = quantity
+    print("What is the price of the item?")
+    price = input("Enter price> ")
+    store_inventory[item] = {"quantity": quantity, "price": price}
     print(f"{quantity} {item} added to inventory")
+    print("-------------------------------")
+    user_options()
+    
+def edit_inventory():
+    """Allows the user to edit the quantity and/or price of an item in the inventory."""
+    print("What would you like to edit?")
+    item = input("Enter item> ")
+    print("What is the new quantity?")
+    quantity = input("Enter quantity> ")
+    print("What is the new price?")
+    price = input("Enter price> ")
+    store_inventory[item]["quantity"] = quantity
+    store_inventory[item]["price"] = price
+    print(f"{item} quantity updated to {quantity}")
+    print(f"{item} price updated to {price}")
+    print("-------------------------------")
+    user_options()
 
 def remove_inventory():
     """
@@ -55,6 +105,8 @@ def remove_inventory():
     quantity = input("Enter quantity> ")
     store_inventory[item] = quantity
     print(f"{quantity} {item} removed from inventory")
+    print("-------------------------------")
+    user_options()
 
 # Ask user what they want to do
 print("Welcome to the generic store Inventory Manager!")
