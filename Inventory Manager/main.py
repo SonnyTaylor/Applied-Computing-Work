@@ -9,7 +9,6 @@ store_inventory = {
 }
 
 # Define terminal colors
-# TODO Make the logo green
 TGREEN = '\033[32m' 
 TWHITE = '\033[37m'
 TBLUE = '\033[34m'
@@ -94,12 +93,26 @@ def add_inventory():
     print(f"{quantity} {item} added to inventory")
     print("-------------------------------")
     user_options(True)
-    
+
 def edit_inventory():
     """Allows the user to edit the quantity and/or price of an item in the inventory."""
     clear_terminal()
+    for item, details in store_inventory.items():
+        quantity = details["quantity"]
+        price = details["price"]
+        print(f"{item}: Quantity: {quantity}, Price: {price}")
+        print("-------------------------------")
     print("What would you like to edit?")
     item = input("Enter item> ")
+
+    if item not in store_inventory:
+        print(f"{item} does not exist in the inventory.")
+        print("-------------------------------")
+        item_dont_exist = input("Press enter to continue")
+        if item_dont_exist == "":
+            edit_inventory()
+        return
+
     print("What is the new quantity?")
     quantity = input("Enter quantity> ")
     print("What is the new price?")
