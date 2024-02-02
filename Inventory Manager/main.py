@@ -1,5 +1,5 @@
 # By Sonny Taylor for my Applied Computer class
-# find me and this git repo at https://github.com/SonnyTaylor/Applied-Computing-Work
+# Find me and this git repo at https://github.com/SonnyTaylor/Applied-Computing-Work
 
 # OS import used for clearing the terminal
 import os
@@ -40,13 +40,13 @@ def clear_terminal():
         os.system("clear")
 
 
-def user_options(clear_term):
+def user_options(clear_term_on_startup):
     """Clears the terminal of everthing creating a blank terminal
 
     Args:
         clear_term (boolean): If true, clear the terminal upon being called, if false pass
     """
-    if clear_term == True:
+    if clear_term_on_startup == True:
         clear_terminal()
     print(TBLUE + "What would you like to do?" + TWHITE)
     print("1. View inventory")
@@ -152,6 +152,12 @@ def remove_inventory():
     Removes an item from inventory
     """
     clear_terminal()
+    # print the current inventory
+    for item, details in store_inventory.items():
+        quantity = details["quantity"]
+        price = details["price"]
+        print(f"{item}: Quantity: {quantity}, Price: {price}")
+        print("-------------------------------")
     print("What would you like to remove?")
     item = input("Enter item> ")
 
