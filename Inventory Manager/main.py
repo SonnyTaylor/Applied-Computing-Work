@@ -89,6 +89,7 @@ def view_inventory():
         user_options(True)
 
 
+# Define the function to add an item to the inventory
 def add_inventory():
     """
     Adds a new item, its quantity, and price to the inventory.
@@ -96,37 +97,44 @@ def add_inventory():
     clear_terminal()
     print("What would you like to add?")
     item = input("Enter item> ")
+
+    # Check if item is empty
     if not item:
         print("Item cannot be empty.")
-        time.sleep(1)
+        add_inventory_item_error = input("Press enter to continue")
+        if add_inventory_item_error == "":
+            # Return to the start
+            add_inventory()
         add_inventory()
         return
 
     print("How many would you like to add?")
     quantity = input("Enter quantity> ")
+
+    # Check if quantity is a positive integer
     if not quantity.isdigit():
         print("Quantity must be a positive integer.")
-        time.sleep(1)
+        add_inventory_quantity_error = input("Press enter to continue")
+        if add_inventory_quantity_error == "":
+            # Return to the start
+            add_inventory()
         add_inventory()
         return
     quantity = int(quantity)
 
     print("What is the price of the item?")
     price = input("Enter price> ")
+
     try:
         price = float(price)
     except ValueError:
         print("Price must be a number.")
-        time.sleep(1)
+        add_inventory_price_error = input("Press enter to continue")
+        if add_inventory_price_error == "":
+            # Return to the start
+            add_inventory()
         add_inventory()
         return
-
-    # add the item to the inventory
-    store_inventory[item] = {"quantity": quantity, "price": price}
-    print(f"{quantity} {item} added to inventory")
-    print("-------------------------------")
-    time.sleep(1)
-    user_options(True)
 
 
 def edit_inventory():
