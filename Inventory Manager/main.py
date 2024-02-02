@@ -142,14 +142,14 @@ def edit_inventory():
         quantity = details["quantity"]
         price = details["price"]
         print(f"{item}: Quantity: {quantity}, Price: {price}")
-        print("-------------------------------")
+        print(TBLUE + "-------------------------------" + TWHITE)
     print("What would you like to edit?")
     item = input("Enter item> ")
 
     # Check if item is in inventory
     if item not in store_inventory:
         print(f"{item} does not exist in the inventory.")
-        print("-------------------------------")
+        print(TBLUE + "-------------------------------" + TWHITE)
         item_dont_exist = input("Press enter to continue")
         if item_dont_exist == "":
             edit_inventory()
@@ -168,7 +168,7 @@ def edit_inventory():
     store_inventory[item]["price"] = price
     print(f"{item} quantity updated to {quantity}")
     print(f"{item} price updated to {price}")
-    print("-------------------------------")
+    print(TBLUE + "-------------------------------" + TWHITE)
     # return to the options
     user_options(True)
 
@@ -183,14 +183,14 @@ def remove_inventory():
         quantity = details["quantity"]
         price = details["price"]
         print(f"{item}: Quantity: {quantity}, Price: {price}")
-        print("-------------------------------")
+        print(TBLUE + "-------------------------------" + TWHITE)
     print("What would you like to remove?")
     item = input("Enter item> ")
 
     # Check if item is in inventory
     if item not in store_inventory:
         print(f"{item} does not exist in the inventory.")
-        print("-------------------------------")
+        print(TBLUE + "-------------------------------" + TWHITE)
         item_dont_exist = input("Press enter to continue")
         if item_dont_exist == "":
             remove_inventory()
@@ -199,7 +199,7 @@ def remove_inventory():
     # delete item from inventory
     store_inventory.pop(item, None)
     print(f"{item} removed from inventory")
-    print("-------------------------------")
+    print(TBLUE + "-------------------------------" + TWHITE)
     view_inventory_finished = input("Press enter to continue")
     if view_inventory_finished == "":
         # return to the options
