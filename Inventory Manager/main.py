@@ -217,16 +217,6 @@ def remove_inventory():
     print("What would you like to remove?")
     item = input("Enter item> ")
 
-    # Check if the user wants to remove all items
-    if item.lower == "all":
-        store_inventory.clear()
-        print("All items removed from inventory")
-        print(TBLUE + "-------------------------------" + TWHITE)
-        view_inventory_finished = input("Press enter to continue")
-        if view_inventory_finished == "":
-            # Return to the options
-            user_options(True)
-
     # Check if item is in inventory
     if item not in store_inventory:
         print(f"{item} does not exist in the inventory.")
