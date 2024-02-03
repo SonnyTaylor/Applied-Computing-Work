@@ -106,6 +106,16 @@ def add_inventory():
         add_inventory()
         return
 
+    # Check if item already exists in inventory
+    if item in store_inventory:
+        print(f"{item} already exists in the inventory.")
+        add_inventory_item_exists_error = input("Press enter to continue")
+        if add_inventory_item_exists_error == "":
+            # Return to the start
+            add_inventory()
+        add_inventory()
+        return
+
     print("How many would you like to add?")
     quantity = input("Enter quantity> ")
 
@@ -124,7 +134,16 @@ def add_inventory():
     price = input("Enter price> ")
 
     try:
+        # Convert price to a float
         price = float(price)
+        print(
+            TBLUE
+            + f"{item} added to inventory with quantity {quantity} and price ${price}"
+            + TWHITE
+        )
+        add_inventory_finished = input("Press enter to continue")
+        if add_inventory_finished == "":
+            user_options(True)
     except ValueError:
         print("Price must be a number.")
         add_inventory_price_error = input("Press enter to continue")
@@ -138,11 +157,20 @@ def add_inventory():
 def edit_inventory():
     """Allows the user to edit the quantity and/or price of an item in the inventory."""
     clear_terminal()
-    for item, details in store_inventory.items():
-        quantity = details["quantity"]
-        price = details["price"]
-        print(f"{item}: Quantity: {quantity}, Price: {price}")
-        print(TBLUE + "-------------------------------" + TWHITE)
+    # If there are not items in inventory, return to the options
+    if not store_inventory:
+        print(TRED + "Warning: No items in inventory." + TWHITE)
+        no_items_continue = input("Press enter to continue")
+        if no_items_continue == "":
+            user_options(True)
+        else:
+            user_options(True)
+    else:
+        for item, details in store_inventory.items():
+            quantity = details["quantity"]
+            price = details["price"]
+            print(f"{item}: Quantity: {quantity}, Price: {price}")
+            print(TBLUE + "-------------------------------" + TWHITE)
     print("What would you like to edit?")
     item = input("Enter item> ")
 
@@ -163,13 +191,13 @@ def edit_inventory():
     if not isinstance(price, float):
         price = float(price)
 
-    # update the item in the inventory
+    # Update the item in the inventory
     store_inventory[item]["quantity"] = quantity
     store_inventory[item]["price"] = price
     print(f"{item} quantity updated to {quantity}")
     print(f"{item} price updated to {price}")
     print(TBLUE + "-------------------------------" + TWHITE)
-    # return to the options
+    # Return to the options
     user_options(True)
 
 
@@ -178,14 +206,26 @@ def remove_inventory():
     Removes an item from inventory
     """
     clear_terminal()
-    # print the current inventory
+
+    # Print the current inventory
     for item, details in store_inventory.items():
         quantity = details["quantity"]
         price = details["price"]
         print(f"{item}: Quantity: {quantity}, Price: {price}")
         print(TBLUE + "-------------------------------" + TWHITE)
+
     print("What would you like to remove?")
     item = input("Enter item> ")
+
+    # Check if the user wants to remove all items
+    if item.lower == "all":
+        store_inventory.clear()
+        print("All items removed from inventory")
+        print(TBLUE + "-------------------------------" + TWHITE)
+        view_inventory_finished = input("Press enter to continue")
+        if view_inventory_finished == "":
+            # Return to the options
+            user_options(True)
 
     # Check if item is in inventory
     if item not in store_inventory:
@@ -196,25 +236,25 @@ def remove_inventory():
             remove_inventory()
         return
 
-    # delete item from inventory
+    # Delete item from inventory
     store_inventory.pop(item, None)
     print(f"{item} removed from inventory")
     print(TBLUE + "-------------------------------" + TWHITE)
     view_inventory_finished = input("Press enter to continue")
     if view_inventory_finished == "":
-        # return to the options
+        # Return to the options
         user_options(True)
 
-    # return to options
+    # Return to options
     user_options(True)
 
 
-# print starting message
+# Print starting message
 print(TGREEN + epic_logo_i_definintly_made_myself_lol + TWHITE)
 
-# start the program
+# Start the program
 if __name__ == "__main__":
     try:
         user_options(False)
     except KeyboardInterrupt:
-        print("\nProgram interrupted. Exiting...")
+        print("\nExiting...")
