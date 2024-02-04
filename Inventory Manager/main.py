@@ -41,12 +41,12 @@ def clear_terminal():
 
 
 def user_options(clear_term_on_startup):
-    """Clears the terminal of everthing creating a blank terminal
+    """Clears the terminal of everything creating a blank terminal.
 
     Args:
-        clear_term (boolean): If true, clear the terminal upon being called, if false pass
+        clear_term_on_startup (boolean): If true, clear the terminal upon being called; if false, pass.
     """
-    if clear_term_on_startup == True:
+    if clear_term_on_startup:
         clear_terminal()
     print(TBLUE + "What would you like to do?" + TWHITE)
     print("1. View inventory")
@@ -83,7 +83,7 @@ def view_inventory():
         print(f"{item}: Quantity: {quantity}, Price: {price}")
         print(TBLUE + "-------------------------------" + TWHITE)
     view_inventory_finished = input("Press enter to continue")
-    if view_inventory_finished == "":
+    if view_inventory_finished is not None:
         # return to the options
         user_options(True)
 
@@ -99,20 +99,14 @@ def add_inventory():
     # Check if item is empty
     if not item:
         print("Item cannot be empty.")
-        add_inventory_item_error = input("Press enter to continue")
-        if add_inventory_item_error == "":
-            # Return to the start
-            add_inventory()
+        input("Press enter to continue")
         add_inventory()
         return
 
     # Check if item already exists in inventory
     if item in store_inventory:
         print(f"{item} already exists in the inventory.")
-        add_inventory_item_exists_error = input("Press enter to continue")
-        if add_inventory_item_exists_error == "":
-            # Return to the start
-            add_inventory()
+        input("Press enter to continue")
         add_inventory()
         return
 
@@ -120,15 +114,15 @@ def add_inventory():
     quantity = input("Enter quantity> ")
 
     # Check if quantity is a positive integer
-    if not quantity.isdigit():
+    try:
+        quantity = int(quantity)
+        if quantity <= 0:
+            raise ValueError
+    except ValueError:
         print("Quantity must be a positive integer.")
-        add_inventory_quantity_error = input("Press enter to continue")
-        if add_inventory_quantity_error == "":
-            # Return to the start
-            add_inventory()
+        input("Press enter to continue")
         add_inventory()
         return
-    quantity = int(quantity)
 
     print("What is the price of the item?")
     price = input("Enter price> ")
@@ -136,20 +130,18 @@ def add_inventory():
     try:
         # Convert price to a float
         price = float(price)
+        # Add item to store_inventory dictionary
+        store_inventory[item] = {"quantity": quantity, "price": price}
         print(
             TBLUE
             + f"{item} added to inventory with quantity {quantity} and price ${price}"
             + TWHITE
         )
-        add_inventory_finished = input("Press enter to continue")
-        if add_inventory_finished == "":
-            user_options(True)
+        input("Press enter to continue")
+        user_options(True)
     except ValueError:
         print("Price must be a number.")
-        add_inventory_price_error = input("Press enter to continue")
-        if add_inventory_price_error == "":
-            # Return to the start
-            add_inventory()
+        input("Press enter to continue")
         add_inventory()
         return
 
@@ -161,7 +153,7 @@ def edit_inventory():
     if not store_inventory:
         print(TRED + "Warning: No items in inventory." + TWHITE)
         no_items_continue = input("Press enter to continue")
-        if no_items_continue == "":
+        if no_items_continue is not None:
             user_options(True)
         else:
             user_options(True)
@@ -179,7 +171,7 @@ def edit_inventory():
         print(f"{item} does not exist in the inventory.")
         print(TBLUE + "-------------------------------" + TWHITE)
         item_dont_exist = input("Press enter to continue")
-        if item_dont_exist == "":
+        if item_dont_exist is not None:
             edit_inventory()
         return
 
@@ -222,7 +214,7 @@ def remove_inventory():
         print(f"{item} does not exist in the inventory.")
         print(TBLUE + "-------------------------------" + TWHITE)
         item_dont_exist = input("Press enter to continue")
-        if item_dont_exist == "":
+        if item_dont_exist is not None:
             remove_inventory()
         return
 
@@ -231,7 +223,7 @@ def remove_inventory():
     print(f"{item} removed from inventory")
     print(TBLUE + "-------------------------------" + TWHITE)
     view_inventory_finished = input("Press enter to continue")
-    if view_inventory_finished == "":
+    if view_inventory_finished is not None:
         # Return to the options
         user_options(True)
 
