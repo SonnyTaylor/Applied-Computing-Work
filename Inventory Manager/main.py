@@ -248,3 +248,4 @@ if __name__ == "__main__":
         user_options(False)
     except KeyboardInterrupt:
         print("\nExiting...")
+        exit()
