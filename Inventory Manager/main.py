@@ -172,11 +172,7 @@ def edit_inventory():
         else:
             user_options(True)
     else:
-        for item, details in store_inventory.items():
-            quantity = details["quantity"]
-            price = details["price"]
-            print(f"{item}: Quantity: {quantity}, Price: {price}")
-            print(TBLUE + "-------------------------------" + TWHITE)
+        print_inventory()
     print("What would you like to edit?")
     item = input("Enter item> ")
 
@@ -192,6 +188,7 @@ def edit_inventory():
     print("What is the new quantity?")
     quantity = int(input("Enter quantity> "))
     print("What is the new price?")
+    # Get float input for price
     price = float(input("Enter price> "))
     # if the price is not a float, convert it to a float
     if not isinstance(price, float):
@@ -213,6 +210,7 @@ def remove_inventory():
     """
     clear_terminal()
 
+    # show current inventory to user
     print_inventory()
 
     print("What would you like to remove?")
