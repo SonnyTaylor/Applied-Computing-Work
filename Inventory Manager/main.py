@@ -16,6 +16,9 @@ TGREEN = "\033[32m"
 TWHITE = "\033[37m"
 TBLUE = "\033[34m"
 TRED = "\033[31m"
+TBOLD = "\033[1m"
+TUNDERLINE = "\033[4m"
+TREVERSE = "\033[7m"
 
 # Logo used upon opening the program
 # make the logo raw dog so that theres no errors
@@ -39,6 +42,7 @@ def clear_terminal():
     elif os.name == "posix":  # Sigma Linux or macOS
         os.system("clear")
     else:
+        # Super niche message that most people should never see, only occurs if user doesnt run Windows, Linux or MacOS. Like seriously though, who uses anything else besides Windows, Linux, or macOS? maybe if this were in some kind of embedded program but like really though.
         print("Unsupported operating system, clearing terminal is not supported")
 
 
