@@ -71,17 +71,23 @@ def user_options(clear_term_on_startup):
         user_options(True)
 
 
-def view_inventory():
-    """
-    Displays the current inventory items, their quantities, and prices.
-    """
-    clear_terminal()
-    print("Current inventory:")
+def print_inventory():
+    print("Current inventory: ")
     for item, details in store_inventory.items():
         quantity = details["quantity"]
         price = details["price"]
         print(f"{item}: Quantity: {quantity}, Price: {price}")
         print(TBLUE + "-------------------------------" + TWHITE)
+
+
+def view_inventory():
+    """
+    Displays the current inventory items, their quantities, and prices.
+    """
+    clear_terminal()
+
+    print_inventory()
+
     view_inventory_finished = input("Press enter to continue")
     if view_inventory_finished is not None:
         # return to the options
@@ -199,12 +205,7 @@ def remove_inventory():
     """
     clear_terminal()
 
-    # Print the current inventory
-    for item, details in store_inventory.items():
-        quantity = details["quantity"]
-        price = details["price"]
-        print(f"{item}: Quantity: {quantity}, Price: {price}")
-        print(TBLUE + "-------------------------------" + TWHITE)
+    print_inventory()
 
     print("What would you like to remove?")
     item = input("Enter item> ")
