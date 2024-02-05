@@ -36,8 +36,10 @@ def clear_terminal():
     """
     if os.name == "nt":  # Windows
         os.system("cls")
-    else:  # Sigma Linux or macOS
+    elif os.name == "posix":  # Sigma Linux or macOS
         os.system("clear")
+    else:
+        print("Unsupported operating system, clearing terminal is not supported")
 
 
 def user_options(clear_term_on_startup):
@@ -145,6 +147,8 @@ def add_inventory():
         )
         input("Press enter to continue")
         user_options(True)
+
+    # TODO - Add a way to exit from an input so that the user doesnt need to exit the whole program if they make a mistake
     except ValueError:
         print("Price must be a number.")
         input("Press enter to continue")
@@ -238,7 +242,10 @@ print(TGREEN + epic_logo_i_definintly_made_myself_lol + TWHITE)
 # Start the program
 if __name__ == "__main__":
     try:
+        # Show option, false shows the unicode art on startup because it doesnt clear the terminal
         user_options(False)
+
+    # if user does like ctrl+c exit the program, just prevent showing errors and stuff
     except KeyboardInterrupt:
         print("\nExiting...")
         exit()
