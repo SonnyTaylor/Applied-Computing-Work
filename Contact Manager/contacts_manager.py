@@ -30,6 +30,8 @@ TBOLD = "\033[1m"
 TUNDERLINE = "\033[4m"
 TNOUNDERLINE = "\033[24m"
 TDEFAULT = "\033[0m"
+TPURPLE = "\033[35m"
+TCYAN = "\033[36m"
 
 
 def press_enter_to_continue():
