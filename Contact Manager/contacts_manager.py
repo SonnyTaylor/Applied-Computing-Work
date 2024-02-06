@@ -25,14 +25,17 @@ TGREEN = "\033[32m"
 TWHITE = "\033[37m"
 TBLUE = "\033[34m"
 TRED = "\033[31m"
+TYELLOW = "\033[33m"
 TBOLD = "\033[1m"
 TUNDERLINE = "\033[4m"
+TNOUNDERLINE = "\033[24m"
 TREVERSE = "\033[7m"
+TDEFAULT = "\033[0m"
 
 
 def press_enter_to_continue():
     """Prints a message to the console and waits for the user to press enter."""
-    enter = input("Press enter to continue")
+    enter = input(TBLUE + TUNDERLINE + "Press enter to continue" + TDEFAULT)
     if enter is not None:
         clear_terminal()
         return
@@ -157,8 +160,15 @@ def display_contacts(contacts):
     if contacts:
         print("Contacts:")
         for name, info in contacts.items():
-            print(f"Name: {name}, Phone: {info['phone']}, Email: {info['email']}")
+            print(
+                TBLUE
+                + f"Name: {TDEFAULT}{name}, {TBLUE}Phone: {TDEFAULT}{info['phone']}, {TBLUE}Email: {TDEFAULT}{info['email']}"
+            )
+            print(
+                "--------------------------------------------------------------------"
+            )
     else:
-        print("No contacts found.")
+        # Print error in red
+        print(TRED + "No contacts found." + TDEFAULT)
 
     press_enter_to_continue()
