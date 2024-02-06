@@ -49,4 +49,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nExiting program...")
+        cm.save_contacts(contacts, "contacts.json")
+        cm.clear_terminal()
+        sys.exit()
+    except EOFError:
+        print("\nExiting program...")
+        cm.save_contacts(contacts, "contacts.json")
+        cm.clear_terminal()

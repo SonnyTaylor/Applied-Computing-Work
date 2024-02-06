@@ -10,14 +10,12 @@ from re import T
 # Logo that is displayed on startup
 # its the star wars font lol
 contacts_logo = r"""
-
   ______   ______   .__   __. .___________.    ___       ______ .___________.    _______.
  /      | /  __  \  |  \ |  | |           |   /   \     /      ||           |   /       |
 |  ,----'|  |  |  | |   \|  | `---|  |----`  /  ^  \   |  ,----'`---|  |----`  |   (----`
 |  |     |  |  |  | |  . `  |     |  |      /  /_\  \  |  |         |  |        \   \    
 |  `----.|  `--'  | |  |\   |     |  |     /  _____  \ |  `----.    |  |    .----)   |   
- \______| \______/  |__| \__|     |__|    /__/     \__\ \______|    |__|    |_______/    
-                                                                                         
+ \______| \______/  |__| \__|     |__|    /__/     \__\ \______|    |__|    |_______/                                                                                         
 """
 
 # Define terminal colors constants cause i dont wanna use a pip module for this like colorama
