@@ -1,6 +1,35 @@
 # Import json module so that contacts can be pulled from a json file and saved to a json file.
 import json
 
+# import os to clear screen
+import os
+
+# Logo that is displayed on startup
+# its the star wars font lol
+contacts_logo = r"""
+
+  ______   ______   .__   __. .___________.    ___       ______ .___________.    _______.
+ /      | /  __  \  |  \ |  | |           |   /   \     /      ||           |   /       |
+|  ,----'|  |  |  | |   \|  | `---|  |----`  /  ^  \   |  ,----'`---|  |----`  |   (----`
+|  |     |  |  |  | |  . `  |     |  |      /  /_\  \  |  |         |  |        \   \    
+|  `----.|  `--'  | |  |\   |     |  |     /  _____  \ |  `----.    |  |    .----)   |   
+ \______| \______/  |__| \__|     |__|    /__/     \__\ \______|    |__|    |_______/    
+                                                                                         
+"""
+
+
+def clear_terminal():
+    """
+    Clears the terminal screen.
+    """
+    if os.name == "nt":  # Windows
+        os.system("cls")
+    elif os.name == "posix":  # Sigma Linux or macOS
+        os.system("clear")
+    else:
+        # Super niche message that most people should never see, only occurs if user doesnt run Windows, Linux or MacOS. Like seriously though, who uses anything else besides Windows, Linux, or macOS? maybe if this were in some kind of embedded program but like really though.
+        print("Unsupported operating system, clearing terminal is not supported")
+
 
 def load_contacts(filename):
     """Loads the contacts from a file and returns them as a dictionary.
@@ -31,6 +60,11 @@ def save_contacts(contacts, filename):
 
 
 def add_contact(contacts):
+    """Gets user input to add a new contact
+
+    Args:
+        contacts (dict): A dictionary containing the existing contacts.
+    """
     name = input("Enter contact name: ")
     phone = input("Enter phone number: ")
     email = input("Enter email address: ")
@@ -39,6 +73,11 @@ def add_contact(contacts):
 
 
 def search_contact(contacts):
+    """Searchs for a specific contact by name.
+
+    Args:
+        contacts (dict): A dictionary containing the existing contacts.
+    """
     name = input("Enter contact name to search: ")
     if name in contacts:
         print(
@@ -49,6 +88,11 @@ def search_contact(contacts):
 
 
 def update_contact(contacts):
+    """Updates an existing contact.
+
+    Args:
+        contacts (dict): A dictionary containing the existing contacts.
+    """
     name = input("Enter contact name to update: ")
     if name in contacts:
         phone = input("Enter new phone number (press enter to leave unchanged): ")
@@ -63,6 +107,11 @@ def update_contact(contacts):
 
 
 def delete_contact(contacts):
+    """Deletes a selected contact
+
+    Args:
+        contacts (dict): A dictionary containing the existing contacts.
+    """
     name = input("Enter contact name to delete: ")
     if name in contacts:
         del contacts[name]
@@ -72,6 +121,11 @@ def delete_contact(contacts):
 
 
 def display_contacts(contacts):
+    """Prints the contacts to the console.
+
+    Args:
+        contacts (dict): A dictionary containing the existing contacts.
+    """
     if contacts:
         print("Contacts:")
         for name, info in contacts.items():

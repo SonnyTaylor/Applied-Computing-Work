@@ -1,12 +1,14 @@
 # main.py
-import contacts_manager as cf
+from tkinter import N
+import contacts_manager as cm
 
 
 def main():
-    contacts = cf.load_contacts("contacts.json")
+    contacts = cm.load_contacts("contacts.json")
+    cm.clear_terminal()
 
     while True:
-        print("\nContact Management System")
+        print(contacts_logo)
         print("1. Add a contact")
         print("2. Search for a contact")
         print("3. Update a contact")
@@ -18,18 +20,18 @@ def main():
 
         match choice:
             case "1":
-                cf.add_contact(contacts)
+                cm.add_contact(contacts)
             case "2":
-                cf.search_contact(contacts)
+                cm.search_contact(contacts)
             case "3":
-                cf.update_contact(contacts)
+                cm.update_contact(contacts)
             case "4":
-                cf.delete_contact(contacts)
+                cm.delete_contact(contacts)
             case "5":
-                cf.display_contacts(contacts)
+                cm.display_contacts(contacts)
             case "6":
                 print("Exiting program...")
-                cf.save_contacts(contacts, "contacts.json")
+                cm.save_contacts(contacts, "contacts.json")
                 exit()
             case _:
                 print("Invalid choice. Please enter a number between 1 and 6.")
