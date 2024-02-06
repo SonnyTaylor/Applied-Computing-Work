@@ -1,5 +1,5 @@
 # main.py
-import contacts_manager as cm
+import contacts_manager as cm  # import the contacts_manager module :)
 import sys  # Import the sys module to use the exit function
 
 contacts = cm.load_contacts("contacts.json")
