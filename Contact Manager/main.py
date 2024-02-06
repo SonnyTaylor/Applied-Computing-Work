@@ -40,6 +40,8 @@ def main():
                 sys.exit()  # Use the exit function from the sys module to exit the program
             case _:
                 print("Invalid choice. Please enter a number between 1 and 5.")
+                cm.press_enter_to_continue()
+                cm.clear_terminal()
 
 
 if __name__ == "__main__":

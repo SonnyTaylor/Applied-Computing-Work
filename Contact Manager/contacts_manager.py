@@ -36,25 +36,27 @@ TDEFAULT = "\033[0m"
 def press_enter_to_continue():
     """Prints a message to the console and waits for the user to press enter."""
     enter = input(TBLUE + TUNDERLINE + "Press enter to continue" + TDEFAULT)
-    if enter is not None:
-        clear_terminal()
-        return
-    else:
-        clear_terminal()
-        return
+    match enter:
+        case None:
+            clear_terminal()
+            return
+        case _:
+            clear_terminal()
+            return
 
 
 def clear_terminal():
     """
     Clears the terminal screen.
     """
-    if os.name == "nt":  # Windows
-        os.system("cls")
-    elif os.name == "posix":  # Sigma Linux or macOS
-        os.system("clear")
-    else:
-        # Super niche message that most people should never see, only occurs if user doesnt run Windows, Linux or MacOS. Like seriously though, who uses anything else besides Windows, Linux, or macOS? maybe if this were in some kind of embedded program but like really though.
-        print("Unsupported operating system, clearing terminal is not supported")
+    match os.name:
+        case "nt":  # Windows
+            os.system("cls")
+        case "posix":  # Sigma Linux or macOS
+            os.system("clear")
+        case _:
+            # Super niche message that most people should never see, only occurs if user doesnt run Windows, Linux or MacOS. Like seriously though, who uses anything else besides Windows, Linux, or macOS? maybe if this were in some kind of embedded program but like really though.
+            print("Unsupported operating system, clearing terminal is not supported")
 
 
 def load_contacts(filename):
@@ -74,11 +76,13 @@ def load_contacts(filename):
             )  # Add this line for debugging
             return contacts
     except FileNotFoundError:
-        print("Contacts file not found:", filename)  # Add this line for debugging
+        print(
+            TRED + "Contacts file not found:", filename + TDEFAULT
+        )  # Add this line for debugging
         return {}
     except json.JSONDecodeError:
         print(
-            "Error decoding JSON data in contacts file:", filename
+            TRED + "Error decoding JSON data in contacts file:", filename + TDEFAULT
         )  # Add this line for debugging
         return {}
 
@@ -108,15 +112,16 @@ def add_contact(contacts):
     print("Contact added successfully.")
     save_contacts(contacts, "contacts.json")
     add_contacts_finished = input("Would you like to add another contact? (y/n): ")
-    if add_contacts_finished.lower() == "y":
-        add_contact(contacts)
-    elif add_contacts_finished.lower() == "n":
-        clear_terminal()
-        return
-    else:
-        print("Invalid input. Returning to main menu.")
-        clear_terminal()
-        return
+    match add_contacts_finished.lower():
+        case "y":
+            add_contact(contacts)
+        case "n":
+            clear_terminal()
+            return
+        case _:
+            print("Invalid input. Returning to main menu.")
+            clear_terminal()
+            return
 
 
 def update_contact(contacts):
@@ -130,6 +135,7 @@ def update_contact(contacts):
         new_name = input("Enter new contact name (press enter to leave unchanged): ")
         phone = input("Enter new phone number (press enter to leave unchanged): ")
         email = input("Enter new email address (press enter to leave unchanged): ")
+        # i could use a match case here, but tbh its just harder to read due to the way its structered with the dictionary and stuff
         if phone:
             contacts[name]["phone"] = phone
         if email:
