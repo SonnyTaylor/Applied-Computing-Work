@@ -16,7 +16,7 @@ number_members = len(date_of_birth)
 
 # Iterate through each member
 for i in range(1, number_members + 1):
-    # Check if the member is born before 1977
+    # Check if the member is born before 1977 and is at least 40 years old
     if date_of_birth[i - 1] < 1977 and 2024 - date_of_birth[i - 1] >= 40:
         # Print the member's information
         print(
