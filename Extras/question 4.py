@@ -12,10 +12,13 @@ date_of_birth = [1970, 1975, 1980, 1985, 1990]
 surname = ["Smith", "Jones", "Taylor", "Brown", "Williams"]
 firstname = ["John", "David", "Peter", "Paul", "Simon"]
 gender = ["M", "M", "M", "M", "M"]
-number_members = 5
+number_members = len(date_of_birth)
 
+# Iterate through each member
 for i in range(1, number_members + 1):
-    if 2024 - date_of_birth[i - 1] >= 40:
+    # Check if the member is at least 40 years old and born before 1977
+    if date_of_birth[i - 1] < 1977 and 2024 - date_of_birth[i - 1] >= 40:
+        # Print the member's information
         print(
             f"First Name: {firstname[i - 1]}, Surname: {surname[i - 1]}, Gender: {gender[i - 1]}, Date of Birth: {date_of_birth[i - 1]}"
         )
