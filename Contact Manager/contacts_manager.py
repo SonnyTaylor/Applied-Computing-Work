@@ -29,7 +29,6 @@ TYELLOW = "\033[33m"
 TBOLD = "\033[1m"
 TUNDERLINE = "\033[4m"
 TNOUNDERLINE = "\033[24m"
-TREVERSE = "\033[7m"
 TDEFAULT = "\033[0m"
 
 
@@ -131,7 +130,9 @@ def update_contact(contacts):
         contacts (dict): A dictionary containing the existing contacts.
     """
     name = input("Enter contact name to update: ")
-    if name in contacts:
+    if name == "":
+        print("Contact not found.")
+    elif name in contacts:
         new_name = input("Enter new contact name (press enter to leave unchanged): ")
         phone = input("Enter new phone number (press enter to leave unchanged): ")
         email = input("Enter new email address (press enter to leave unchanged): ")
