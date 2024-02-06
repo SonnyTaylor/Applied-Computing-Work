@@ -1,6 +1,5 @@
 # The All-Star Sports Club needs to find out who is eligible to enter an upcoming Masters event.
-# All participants in the Masters event must be 40 years old or olden The club needs to print out a list of
-# eligible members.
+# All participants in the Masters event must be 40 years old or olden The club needs to print out a list of eligible members.
 # When the club's system is running, all data is stored in a series of arrays. The relevant fields are
 # date_of_birth[], surname[], firstname[] and gender[], all with the same index value for all fields ofa member.
 # The variable numbermembers holds the number of members of the club and the arrays start at the value 1.
