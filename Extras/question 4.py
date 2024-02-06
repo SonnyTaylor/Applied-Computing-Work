@@ -12,9 +12,9 @@ date_of_birth = [1970, 1975, 1980, 1985, 1990]
 surname = ["Smith", "Jones", "Taylor", "Brown", "Williams"]
 firstname = ["John", "David", "Peter", "Paul", "Simon"]
 gender = ["M", "M", "M", "M", "M"]
-numbermembers = 5
+number_members = 5
 
-for i in range(1, numbermembers + 1):
+for i in range(1, number_members + 1):
     if 2024 - date_of_birth[i - 1] >= 40:
         print(
             f"First Name: {firstname[i - 1]}, Surname: {surname[i - 1]}, Gender: {gender[i - 1]}, Date of Birth: {date_of_birth[i - 1]}"
