@@ -106,6 +106,7 @@ def add_contact(contacts):
     email = input("Enter email address: ")
     contacts[name] = {"phone": phone, "email": email}
     print("Contact added successfully.")
+    save_contacts(contacts, "contacts.json")
     add_contacts_finished = input("Would you like to add another contact? (y/n): ")
     if add_contacts_finished.lower() == "y":
         add_contact(contacts)
@@ -126,13 +127,18 @@ def update_contact(contacts):
     """
     name = input("Enter contact name to update: ")
     if name in contacts:
+        new_name = input("Enter new contact name (press enter to leave unchanged): ")
         phone = input("Enter new phone number (press enter to leave unchanged): ")
         email = input("Enter new email address (press enter to leave unchanged): ")
         if phone:
             contacts[name]["phone"] = phone
         if email:
             contacts[name]["email"] = email
+        if new_name:
+            contacts[new_name] = contacts.pop(name)
         print("Contact updated successfully.")
+        save_contacts(contacts, "contacts.json")
+        press_enter_to_continue()
     else:
         print("Contact not found.")
 
@@ -147,15 +153,18 @@ def delete_contact(contacts):
     if name in contacts:
         del contacts[name]
         print("Contact deleted successfully.")
+        save_contacts(contacts, "contacts.json")
+        press_enter_to_continue()
     else:
         print("Contact not found.")
 
 
-def display_contacts(contacts):
+def display_contacts(contacts, ent_to_contin):
     """Prints the contacts to the console.
 
     Args:
         contacts (dict): A dictionary containing the existing contacts.
+        ent_to_contin (bool): A boolean that determines if the user needs to press enter to continue.
     """
     if contacts:
         print("Contacts:")
@@ -171,4 +180,7 @@ def display_contacts(contacts):
         # Print error in red
         print(TRED + "No contacts found." + TDEFAULT)
 
-    press_enter_to_continue()
+    if ent_to_contin:
+        press_enter_to_continue()
+    else:
+        return

@@ -24,13 +24,15 @@ def main():
                 cm.add_contact(contacts)
             case "2":
                 cm.clear_terminal()
+                cm.display_contacts(contacts, False)
                 cm.update_contact(contacts)
             case "3":
                 cm.clear_terminal()
+                cm.display_contacts(contacts, False)
                 cm.delete_contact(contacts)
             case "4":
                 cm.clear_terminal()
-                cm.display_contacts(contacts)
+                cm.display_contacts(contacts, True)
             case "5":
                 print("Exiting program...")
                 cm.save_contacts(contacts, "contacts.json")
