@@ -1,9 +1,11 @@
 # main.py
 import contacts_manager as cm
+import sys  # Import the sys module to use the exit function
+
+contacts = cm.load_contacts("contacts.json")
 
 
 def main():
-    contacts = cm.load_contacts("contacts.json")
     cm.clear_terminal()
 
     while True:
@@ -33,7 +35,7 @@ def main():
                 print("Exiting program...")
                 cm.save_contacts(contacts, "contacts.json")
                 cm.clear_terminal()
-                exit()
+                sys.exit()  # Use the exit function from the sys module to exit the program
             case _:
                 print("Invalid choice. Please enter a number between 1 and 5.")
 

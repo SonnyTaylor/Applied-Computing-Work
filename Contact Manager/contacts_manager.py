@@ -1,3 +1,5 @@
+# contact_manager.py
+
 # Import json module so that contacts can be pulled from a json file and saved to a json file.
 import json
 
@@ -63,8 +65,18 @@ def load_contacts(filename):
     """
     try:
         with open(filename, "r") as file:
-            return json.load(file)
+            contacts = json.load(file)
+            print(
+                "Contacts loaded successfully:", contacts
+            )  # Add this line for debugging
+            return contacts
     except FileNotFoundError:
+        print("Contacts file not found:", filename)  # Add this line for debugging
+        return {}
+    except json.JSONDecodeError:
+        print(
+            "Error decoding JSON data in contacts file:", filename
+        )  # Add this line for debugging
         return {}
 
 
