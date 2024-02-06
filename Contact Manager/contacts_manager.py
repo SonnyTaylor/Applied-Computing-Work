@@ -17,6 +17,16 @@ contacts_logo = r"""
                                                                                          
 """
 
+# Define terminal colors constants cause i dont wanna use a pip module for this like colorama
+# some of these arnt used but oh well, theyre here for future use i guess
+TGREEN = "\033[32m"
+TWHITE = "\033[37m"
+TBLUE = "\033[34m"
+TRED = "\033[31m"
+TBOLD = "\033[1m"
+TUNDERLINE = "\033[4m"
+TREVERSE = "\033[7m"
+
 
 def clear_terminal():
     """
