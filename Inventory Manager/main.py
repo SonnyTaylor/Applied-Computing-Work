@@ -12,6 +12,7 @@ store_inventory = {
 }
 
 # Define terminal colors constants cause i dont wanna use a pip module for this like colorama
+# some of these arnt used but oh well, theyre here for future use i guess
 TGREEN = "\033[32m"
 TWHITE = "\033[37m"
 TBLUE = "\033[34m"
