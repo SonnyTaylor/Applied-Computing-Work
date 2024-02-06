@@ -5,6 +5,7 @@ import json
 
 # import os to clear screen
 import os
+from re import T
 
 # Logo that is displayed on startup
 # its the star wars font lol
@@ -36,7 +37,7 @@ TCYAN = "\033[36m"
 
 def press_enter_to_continue():
     """Prints a message to the console and waits for the user to press enter."""
-    enter = input(TBLUE + TUNDERLINE + "Press enter to continue" + TDEFAULT)
+    enter = input(TGREEN + TUNDERLINE + "Press enter to continue" + TDEFAULT)
     match enter:
         case None:
             clear_terminal()
@@ -193,3 +194,27 @@ def display_contacts(contacts, ent_to_contin):
         press_enter_to_continue()
     else:
         return
+
+
+def search_contacts(contacts):
+    """Searches for a contact by name.
+
+    Args:
+        contacts (dict): A dictionary containing the existing contacts.
+    """
+    name = input("Enter contact name to search for: ").lower()
+    found = False
+    print(TBLUE + TUNDERLINE + "Search results:" + TDEFAULT)
+    for contact_name, info in contacts.items():
+        if name in contact_name.lower():
+            print(
+                TBLUE
+                + f"Name: {TDEFAULT}{contact_name}, {TBLUE}Phone: {TDEFAULT}{info['phone']}, {TBLUE}Email: {TDEFAULT}{info['email']}"
+            )
+            print(
+                "--------------------------------------------------------------------"
+            )
+            found = True
+    if not found:
+        print("Contact not found.")
+    press_enter_to_continue()

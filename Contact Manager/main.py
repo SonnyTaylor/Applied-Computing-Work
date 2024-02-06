@@ -14,7 +14,8 @@ def main():
         print("2. Update a contact")
         print("3. Delete a contact")
         print("4. Display all contacts")
-        print("5. Exit")
+        print("5. Search contacts")
+        print("6. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -34,12 +35,15 @@ def main():
                 cm.clear_terminal()
                 cm.display_contacts(contacts, True)
             case "5":
+                cm.clear_terminal()
+                cm.search_contacts(contacts)
+            case "6":
                 print("Exiting program...")
                 cm.save_contacts(contacts, "contacts.json")
                 cm.clear_terminal()
                 sys.exit()  # Use the exit function from the sys module to exit the program
             case _:
-                print("Invalid choice. Please enter a number between 1 and 5.")
+                print("Invalid choice. Please enter a number between 1 and 6.")
                 cm.press_enter_to_continue()
                 cm.clear_terminal()
 
