@@ -28,6 +28,17 @@ TUNDERLINE = "\033[4m"
 TREVERSE = "\033[7m"
 
 
+def press_enter_to_continue():
+    """Prints a message to the console and waits for the user to press enter."""
+    enter = input("Press enter to continue")
+    if enter is not None:
+        clear_terminal()
+        return
+    else:
+        clear_terminal()
+        return
+
+
 def clear_terminal():
     """
     Clears the terminal screen.
@@ -80,21 +91,16 @@ def add_contact(contacts):
     email = input("Enter email address: ")
     contacts[name] = {"phone": phone, "email": email}
     print("Contact added successfully.")
-
-
-def search_contact(contacts):
-    """Searchs for a specific contact by name.
-
-    Args:
-        contacts (dict): A dictionary containing the existing contacts.
-    """
-    name = input("Enter contact name to search: ")
-    if name in contacts:
-        print(
-            f"Name: {name}, Phone: {contacts[name]['phone']}, Email: {contacts[name]['email']}"
-        )
+    add_contacts_finished = input("Would you like to add another contact? (y/n): ")
+    if add_contacts_finished.lower() == "y":
+        add_contact(contacts)
+    elif add_contacts_finished.lower() == "n":
+        clear_terminal()
+        return
     else:
-        print("Contact not found.")
+        print("Invalid input. Returning to main menu.")
+        clear_terminal()
+        return
 
 
 def update_contact(contacts):
@@ -142,3 +148,5 @@ def display_contacts(contacts):
             print(f"Name: {name}, Phone: {info['phone']}, Email: {info['email']}")
     else:
         print("No contacts found.")
+
+    press_enter_to_continue()
