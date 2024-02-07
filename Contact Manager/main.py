@@ -15,7 +15,8 @@ def main():
         print("3. Delete a contact")
         print("4. Display all contacts")
         print("5. Search contacts")
-        print("6. Exit")
+        print("6. Delete all contacts")
+        print("7. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -38,6 +39,9 @@ def main():
                 cm.clear_terminal()
                 cm.search_contacts(contacts)
             case "6":
+                cm.clear_terminal()
+                cm.delete_all_contacts(contacts)
+            case "7":
                 print("Exiting program...")
                 cm.save_contacts(contacts, "contacts.json")
                 cm.clear_terminal()

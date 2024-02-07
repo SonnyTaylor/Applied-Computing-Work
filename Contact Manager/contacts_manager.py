@@ -8,7 +8,7 @@ import os
 from re import T
 
 # Logo that is displayed on startup
-# its the star wars font lol
+# its the star wars font lol 👽
 contacts_logo = r"""
   ______   ______   .__   __. .___________.    ___       ______ .___________.    _______.
  /      | /  __  \  |  \ |  | |           |   /   \     /      ||           |   /       |
@@ -192,6 +192,23 @@ def display_contacts(contacts, ent_to_contin):
         press_enter_to_continue()
     else:
         return
+
+
+def delete_all_contacts(contacts):
+    """Deletes all contacts.
+
+    Args:
+        contacts (dict): A dictionary containing the existing contacts.
+    """
+    confirm = input("Are you sure you want to delete all contacts? (y/n): ")
+    if confirm.lower() == "y":
+        contacts.clear()
+        print("All contacts deleted successfully.")
+        save_contacts(contacts, "contacts.json")
+        press_enter_to_continue()
+    else:
+        print("Contacts not deleted.")
+        press_enter_to_continue()
 
 
 def search_contacts(contacts):

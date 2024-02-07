@@ -15,5 +15,4 @@ def write_to_file_with_user_input():
 
 
 if __name__ == "__main__":
-
     write_to_file_with_user_input()
