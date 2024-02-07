@@ -200,7 +200,9 @@ def delete_all_contacts(contacts):
     Args:
         contacts (dict): A dictionary containing the existing contacts.
     """
-    confirm = input("Are you sure you want to delete all contacts? (y/n): ")
+    confirm = input(
+        TRED + "Are you sure you want to delete all contacts? (y/n): " + TDEFAULT
+    )
     if confirm.lower() == "y":
         contacts.clear()
         print("All contacts deleted successfully.")
