@@ -83,8 +83,10 @@ def print_inventory():
     for item, details in store_inventory.items():
         quantity = details["quantity"]
         price = details["price"]
-        print(f"{item}: Quantity: {quantity}, Price: {price}")
-        print(TBLUE + "-------------------------------" + TWHITE)
+        print(
+            f"{item}: Quantity: {quantity}, Price: ${price}, Total Price ${quantity * price}"
+        )
+        print(TBLUE + "---------------------------------------------------" + TWHITE)
 
 
 def view_inventory():
