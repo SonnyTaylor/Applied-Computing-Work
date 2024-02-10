@@ -1,4 +1,5 @@
 # main.py
+
 import contacts_manager as cm  # import the contacts_manager module :)
 import sys  # Import the sys module to use the exit function
 
@@ -18,7 +19,7 @@ def main():
         print("6. Delete all contacts")
         print("7. Exit")
 
-        choice = input("Enter your choice: ")
+        choice = input(cm.TBLUE + "Enter a number: " + cm.TDEFAULT)
 
         match choice:
             case "1":
@@ -63,4 +64,8 @@ if __name__ == "__main__":
     except EOFError:
         print("\nExiting program...")
         cm.save_contacts(contacts, "contacts.json")
+        cm.clear_terminal()
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        cm.press_enter_to_continue()
         cm.clear_terminal()

@@ -1,30 +1,26 @@
 {
   "John Doe": {
-    "phone": "1234567890",
-    "email": "john@example.com"
+    "phone": "123456789101112",
+    "email": "john.doe@example.com"
   },
   "Jane Smith": {
-    "phone": "9876543210",
-    "email": "jane@example.com"
+    "phone": "987654321",
+    "email": "jane.smith@example.com"
   },
   "Alice Johnson": {
-    "phone": "5555555555",
-    "email": "alice@example.com"
+    "phone": "555555555",
+    "email": "alice.johnson@example.com"
   },
-  "Bob Anderson": {
-    "phone": "9999999999",
-    "email": "bob@example.com"
-  },
-  "Sarah Williams": {
-    "phone": "1111111111",
-    "email": "sarah@example.com"
-  },
-  "Michael Brown": {
-    "phone": "2222222222",
-    "email": "michael@example.com"
-  },
-  "Bro Code": {
-    "phone": "111222333444555",
+  "Jeff": {
+    "phone": "1234355678",
     "email": "test@email.com"
+  },
+  "Bailey White": {
+    "phone": "0467048063",
+    "email": "baileydanielw08@gmail.com"
+  },
+  "Johnny Test": {
+    "phone": "911000111123",
+    "email": "fizzbuzz@gmail.com"
   }
 }

@@ -105,13 +105,15 @@ def add_contact(contacts):
     Args:
         contacts (dict): A dictionary containing the existing contacts.
     """
-    name = input("Enter contact name: ")
-    phone = input("Enter phone number: ")
-    email = input("Enter email address: ")
+    name = input(TBLUE + "Enter contact name: " + TDEFAULT)
+    phone = input(TBLUE + "Enter phone number: " + TDEFAULT)
+    email = input(TBLUE + "Enter email address: " + TDEFAULT)
     contacts[name] = {"phone": phone, "email": email}
     print("Contact added successfully.")
     save_contacts(contacts, "contacts.json")
-    add_contacts_finished = input("Would you like to add another contact? (y/n): ")
+    add_contacts_finished = input(
+        TBLUE + "Would you like to add another contact? (y/n): " + TDEFAULT
+    )
     match add_contacts_finished.lower():
         case "y":
             add_contact(contacts)
@@ -119,7 +121,7 @@ def add_contact(contacts):
             clear_terminal()
             return
         case _:
-            print("Invalid input. Returning to main menu.")
+            print(TRED + "Invalid input. Returning to main menu." + TDEFAULT)
             clear_terminal()
             return
 
@@ -130,13 +132,25 @@ def update_contact(contacts):
     Args:
         contacts (dict): A dictionary containing the existing contacts.
     """
-    name = input("Enter contact name to update: ")
+    name = input(TBLUE + "Enter contact name to update: " + TDEFAULT)
     if name == "":
         print("Contact not found.")
     elif name in contacts:
-        new_name = input("Enter new contact name (press enter to leave unchanged): ")
-        phone = input("Enter new phone number (press enter to leave unchanged): ")
-        email = input("Enter new email address (press enter to leave unchanged): ")
+        new_name = input(
+            TBLUE
+            + "Enter new contact name (press enter to leave unchanged): "
+            + TDEFAULT
+        )
+        phone = input(
+            TBLUE
+            + "Enter new phone number (press enter to leave unchanged): "
+            + TDEFAULT
+        )
+        email = input(
+            TBLUE
+            + "Enter new email address (press enter to leave unchanged): "
+            + TDEFAULT
+        )
         # i could use a match case here, but tbh its just harder to read due to the way its structered with the dictionary and stuff
         if phone:
             contacts[name]["phone"] = phone
@@ -157,7 +171,7 @@ def delete_contact(contacts):
     Args:
         contacts (dict): A dictionary containing the existing contacts.
     """
-    name = input("Enter contact name to delete: ")
+    name = input(TBLUE + "Enter contact name to delete: " + TDEFAULT)
     if name in contacts:
         del contacts[name]
         print("Contact deleted successfully.")
@@ -214,16 +228,22 @@ def delete_all_contacts(contacts):
 
 
 def search_contacts(contacts):
-    """Searches for a contact by name.
+    """Searches for a contact by name, phone number, or email.
 
     Args:
         contacts (dict): A dictionary containing the existing contacts.
     """
-    name = input("Enter contact name to search for: ").lower()
+    search_term = input(
+        TBLUE + "Enter contact name, phone number, or email to search for: " + TDEFAULT
+    ).lower()
     found = False
     print(TBLUE + TUNDERLINE + "Search results:" + TDEFAULT)
     for contact_name, info in contacts.items():
-        if name in contact_name.lower():
+        if (
+            search_term in contact_name.lower()
+            or search_term in info["phone"]
+            or search_term in info["email"]
+        ):
             print(
                 TBLUE
                 + f"Name: {TDEFAULT}{contact_name}, {TBLUE}Phone: {TDEFAULT}{info['phone']}, {TBLUE}Email: {TDEFAULT}{info['email']}"
