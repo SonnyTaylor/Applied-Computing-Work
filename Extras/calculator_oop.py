@@ -33,19 +33,23 @@ class Calculator:
 # Create an instance of the Calculator class
 calc = Calculator()
 
-# Get user input for the calculator
-num1 = float(input("Enter the first number: "))
-num2 = float(input("Enter the second number: "))
-operation = input("Enter the operation (+, -, *, /): ")
-match operation:
-    case "+":
-        result = calc.add(num1, num2)
-    case "-":
-        result = calc.subtract(num1, num2)
-    case "*":
-        result = calc.multiply(num1, num2)
-    case "/":
-        result = calc.divide(num1, num2)
-    case _:
-        result = "Invalid operation"
-        
+while True:
+    print("\nSimple Calculator")
+    # Get user input for the calculator
+    num1 = float(input("Enter the first number: "))
+    num2 = float(input("Enter the second number: "))
+    operation = input("Enter the operation (+, -, *, /): ")
+    match operation:
+        case "+":
+            result = calc.add(num1, num2)
+        case "-":
+            result = calc.subtract(num1, num2)
+        case "*":
+            result = calc.multiply(num1, num2)
+        case "/":
+            result = calc.divide(num1, num2)
+        case _:
+            result = "Invalid operation"
+
+    # Print the result
+    print("Result:", result)
