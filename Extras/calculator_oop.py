@@ -29,31 +29,30 @@ class Calculator:
             return num1 / num2
         else:
             raise ValueError("Cannot divide by zero.")
-        
+
+
+# Example usage:
 # Create an instance of the Calculator class
 calc = Calculator()
 
 while True:
     print("\nSimple Calculator")
     try:
-        # Get user input for the calculator
         num1 = float(input("Enter the first number: "))
         num2 = float(input("Enter the second number: "))
         operation = input("Enter the operation (+, -, *, /): ")
-        
-        match operation:
-            case "+":
-                result = calc.add(num1, num2)
-            case "-":
-                result = calc.subtract(num1, num2)
-            case "*":
-                result = calc.multiply(num1, num2)
-            case "/":
-                result = calc.divide(num1, num2)
-            case _:
-                result = "Invalid operation"
 
-        # Print the result
-        print("Result:", result)
+        if operation == "+":
+            result = print(calc.add(num1, num2))
+        elif operation == "-":
+            result = print(calc.subtract(num1, num2))
+        elif operation == "*":
+            result = print(calc.multiply(num1, num2))
+        elif operation == "/":
+            result = print(calc.divide(num1, num2))
+        else:
+            result = "Invalid operation"
+
+    # invalid input error handling
     except ValueError as e:
         print("Invalid input:", e)
