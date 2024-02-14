@@ -16,12 +16,16 @@ class BankAccount:
         return self.__balance
 
 
-# Example usage
-account = BankAccount("123456", 100)
-print(account.get_balance())  # 100
-account.deposit(50)
-print(account.get_balance())  # 150
-account.withdraw(30)
-print(account.get_balance())  # 120
-account.withdraw(200)  # Insufficient balance lol
-print(account.get_balance())  # 120
+input = "Run example usage? (y/n): "
+if input.lower() == "y":
+    # Example usage
+    account = BankAccount("123456", 100)
+    print(account.get_balance())  # 100
+    account.deposit(50)
+    print(account.get_balance())  # 150
+    account.withdraw(30)
+    print(account.get_balance())  # 120
+    account.withdraw(200)  # Insufficient balance lol
+    print(account.get_balance())  # 120
+else:
+    print("Goodbye!")
