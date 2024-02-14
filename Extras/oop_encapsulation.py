@@ -23,5 +23,5 @@ account.deposit(50)
 print(account.get_balance())  # 150
 account.withdraw(30)
 print(account.get_balance())  # 120
-account.withdraw(200)  # Insufficient balance!
+account.withdraw(200)  # Insufficient balance lol
 print(account.get_balance())  # 120
