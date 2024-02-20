@@ -3,3 +3,4 @@
 /.pytest_cache
 Contact Manager/__pycache__/contacts_manager.cpython-312.pyc
 Extras/__pycache__/oop_module_1.cpython-312.pyc
+Book Manager/__pycache__/book_manager_functions.cpython-312.pyc
