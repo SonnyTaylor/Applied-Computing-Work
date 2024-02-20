@@ -1,5 +1,4 @@
 from re import search
-import sys  # Import the sys module to use the exit function
 import os  # Import the os module to clear the terminal
 from datetime import (
     date,

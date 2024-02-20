@@ -6,8 +6,20 @@ import sys  # Import the sys module to use the exit function
 book_manager = Bookmanager()  # Initating the class
 books = book_manager.books
 
+logo = r"""
+______             _     ___  ___                                  
+| ___ \           | |    |  \/  |                                  
+| |_/ / ___   ___ | | __ | .  . | __ _ _ __   __ _  __ _  ___ _ __ 
+| ___ \/ _ \ / _ \| |/ / | |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__|
+| |_/ / (_) | (_) |   <  | |  | | (_| | | | | (_| | (_| |  __/ |   
+\____/ \___/ \___/|_|\_\ \_|  |_/\__,_|_| |_|\__,_|\__, |\___|_|   
+                                                    __/ |          
+                                                   |___/ 
+"""
+
 
 def main():
+    print(logo)
     while True:
         print("Menu:")
         print("1. Add a book")
