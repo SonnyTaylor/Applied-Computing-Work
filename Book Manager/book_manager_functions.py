@@ -8,6 +8,7 @@ from datetime import (
 class Bookmanager:
     def __init__(self):
         # premade list of all books
+        # TODO - Add a way to save the books to a file and load them when the program starts
         self.books = {
             "The Great Gatsby": {
                 "name": "The Great Gatsby",
@@ -20,8 +21,8 @@ class Bookmanager:
                 "name": "To Kill a Mockingbird",
                 "year": 1960,
                 "author": "Harper Lee",
-                "last_checked_out": None,
-                "who_checked_out": None,
+                "last_checked_out": "27-04-2008",
+                "who_checked_out": "Joe",
                 "checked_out": True,
             },
         }
@@ -66,6 +67,16 @@ class Bookmanager:
         genre = input("Enter genre: ")
         year = input("Enter year: ")
         quantity = input("Enter quantity: ")
+        # Add book to dictionary
+        books[book_name] = {
+            "name": book_name,
+            "author": author,
+            "genre": genre,
+            "year": year,
+            "quantity": quantity,
+            "last_checked_out": None,
+            "checked_out": False,
+        }
         # print confirmation details about book
         self.clear_terminal()
         print("Book added successfully.")

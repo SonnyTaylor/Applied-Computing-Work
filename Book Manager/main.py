@@ -73,7 +73,7 @@ def main():
 
 
 if __name__ == "__main__":
-    # run the main loop
+    # run the main loop with error handling
     try:
         main()
     except KeyboardInterrupt:
