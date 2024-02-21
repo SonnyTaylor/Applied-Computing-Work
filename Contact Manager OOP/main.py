@@ -11,6 +11,7 @@ def main():
     contacts_manager.clear_terminal()
 
     while True:
+        # Print logo and menu
         print(
             contacts_manager.TBLUE
             + contacts_manager.contacts_logo
