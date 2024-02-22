@@ -44,9 +44,11 @@ class EBook(Book):
 
 
 # Example Usage
-book = Book("1984", "George Orwell")
+book = Book("1984", "George Orwell")  # Initialize the book object
 print(book.get_info())
 
-ebook = EBook("A Brief History of Time", "Stephen Hawking", "ePub")
+ebook = EBook(
+    "A Brief History of Time", "Stephen Hawking", "ePub"
+)  # Initialize the ebook object
 ebook.set_file_size(14)
 print(ebook.get_ebook_info())
