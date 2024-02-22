@@ -19,27 +19,84 @@
 
 
 class Book:
+    """
+    A class to represent a book.
+
+    Attributes:
+        title (str): The title of the book.
+        author (str): The author of the book.
+
+    Methods:
+        get_info(): Returns a string representation of the book information.
+    """
+
     def __init__(self, title, author):
+        """
+        Initializes a new instance of the Book class.
+
+        Parameters:
+            title (str): The title of the book.
+            author (str): The author of the book.
+        """
         self.title = title
         self.author = author
 
     def get_info(self):
+        """
+        Returns a string representation of the book information.
+
+        Returns:
+            str: A string representation of the book information.
+        """
         return f"Title: {self.title}, Author: {self.author}"
 
 
 class EBook(Book):
+    """A class representing an electronic book.
+
+    Args:
+        Book (class): The base class for the EBook.
+
+    Attributes:
+        title (str): The title of the EBook.
+        author (str): The author of the EBook.
+        file_format (str): The file format of the EBook.
+        __file_size (int): The size of the EBook file in megabytes.
+
+    Methods:
+        __init__(self, title, author, file_format="PDF"): Initializes a new instance of the EBook class.
+        set_file_size(self, size): Sets the file size of the EBook.
+        get_ebook_info(self): Returns a string representation of the EBook information.
+
+    """
+
     def __init__(self, title, author, file_format="PDF"):
         super().__init__(title, author)
         self.__file_size = None
         self.file_format = file_format
 
     def set_file_size(self, size):
+        """Sets the file size of the EBook.
+
+        Args:
+            size (int): The size of the EBook file in megabytes.
+
+        Raises:
+            ValueError: If the size is not a positive integer.
+
+        """
         if isinstance(size, int) and size > 0:
             self.__file_size = size
         else:
             raise ValueError("Invalid file size")
 
     def get_ebook_info(self):
+        """Returns a string representation of the EBook information.
+
+        Returns:
+            str: A string containing the title, author, format, and size of the EBook.
+
+        """
         return f"Title: {self.title}, Author: {self.author}, Format: {self.file_format}, Size: {self.__file_size}MB"
 
 
