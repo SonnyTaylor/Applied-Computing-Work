@@ -2,7 +2,7 @@ import unittest
 from prime import is_prime
 
 
-# prime file
+# prime file for refererence
 """
 def is_prime(number):
     if number <= 1:
