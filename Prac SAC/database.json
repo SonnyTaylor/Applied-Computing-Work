@@ -1,0 +1,42 @@
+{
+  "students": [
+    {
+      "name": "John Doe",
+      "ID": "001",
+      "roll_number": "1001",
+      "enrolled_courses": {
+        "Math": 85,
+        "English": 90
+      },
+      "attendance": {
+        "Math": ["2022-01-01", "2022-01-02"],
+        "English": ["2022-01-01", "2022-01-03"]
+      }
+    },
+    {
+      "name": "Jane Doe",
+      "ID": "002",
+      "roll_number": "1002",
+      "enrolled_courses": {
+        "Math": 95,
+        "English": 92
+      },
+      "attendance": {
+        "Math": ["2022-01-01", "2022-01-02", "2022-01-03"],
+        "English": ["2022-01-01", "2022-01-02"]
+      }
+    }
+  ],
+  "courses": [
+    {
+      "course_name": "Math",
+      "course_code": "MTH101",
+      "enrolled_students": ["1001", "1002"]
+    },
+    {
+      "course_name": "English",
+      "course_code": "ENG101",
+      "enrolled_students": ["1001", "1002"]
+    }
+  ]
+}

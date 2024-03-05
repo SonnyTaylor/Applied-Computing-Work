@@ -1,85 +1,53 @@
-# main.py
-
-import lib.user_interface as user_interface
-import lib.json_db_management as db
-import lib.student_management_system as stud
-import sys  # Import the sys module to use the exit function
-
-students = db.load_students("students.json")
+import sys
+from student_management_system_class import StudentManagementSystem as sms
+import user_interface as ui
 
 
 def main():
-    user_interface.clear_terminal()
-
+    print("Welcome to the Student Management System!")
     while True:
-        # Print logo and menu
-        print(
-            user_interface.TBLUE
-            + user_interface.student_management_logo
-            + user_interface.TWHITE
-        )
-        print("1. Add/Remove a student")
-        print("2. Add/Remove a course")
-        print("3. Mark Attendance")
-        print("4. Entroll students")
-        print("5. View GPA Reports")
-        print("6. View attendance")
-        print("7. Generate report")
-        print("8. Search students")
+        print("1. Add a student")
+        print("2. Add a course")
+        print("3. Enroll a student in a course")
+        print("4. Remove a student from a course")
+        print("5. List all students")
+        print("6. List all courses")
+        print("7. List all students in a course")
+        print("8. Calculate a student's GPA")
+        print("9. Search for a student")
+        print("10. Get student info")
+        print("11. Exit")
+        choice = input("Enter your choice: ")
 
-        choice = input(
-            user_interface.TBLUE + "Enter a number: " + user_interface.TDEFAULT
-        )
-
-        match choice:
-            case "1":
-                user_interface.clear_terminal()
-                user_interface.add_remove_student(students)
-            case "2":
-                user_interface.clear_terminal()
-                user_interface.add_remove_course()
-            case "3":
-                user_interface.clear_terminal()
-                user_interface.mark_attendance()
-            case "4":
-                user_interface.clear_terminal()
-                user_interface.enroll_students()
-            case "5":
-                user_interface.clear_terminal()
-                user_interface.view_gpa_reports()
-            case "6":
-                user_interface.clear_terminal()
-                user_interface.view_attendance()
-            case "7":
-                user_interface.clear_terminal()
-                user_interface.generate_report()
-            case "8":
-                user_interface.clear_terminal()
-                user_interface.search_students(students)
-            case "9":
-                print("Exiting program...")
-                db.save_students(students, "students.json")
-                user_interface.clear_terminal()
-                sys.exit()  # Use the exit function from the sys module to exit the program
-            case _:
-                print("Invalid choice. Please enter a number between 1 and 6.")
-                user_interface.press_enter_to_continue()
-                user_interface.clear_terminal()
+        try:
+            if choice == "1":
+                ui.add_student()
+            elif choice == "2":
+                ui.add_course()
+            elif choice == "3":
+                ui.enroll_student()
+            elif choice == "4":
+                ui.remove_student()
+            elif choice == "5":
+                ui.list_students()
+            elif choice == "6":
+                ui.list_courses()
+            elif choice == "7":
+                ui.list_students_in_course()
+            elif choice == "8":
+                ui.calculate_gpa()
+            elif choice == "9":
+                ui.search_student()
+            elif choice == "10":
+                ui.get_student_info()
+            elif choice == "11":
+                print("Goodbye!")
+                sys.exit()
+            else:
+                print("Invalid choice. Please try again.")
+        except Exception as e:
+            print("An error occurred:", str(e))
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\nExiting program...")
-        db.save_students(students, "students.json")
-        user_interface.clear_terminal()
-        sys.exit()
-    except EOFError:
-        print("\nExiting program...")
-        db.save_students(students, "students.json")
-        user_interface.clear_terminal()
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        user_interface.press_enter_to_continue()
-        user_interface.clear_terminal()
+    main()

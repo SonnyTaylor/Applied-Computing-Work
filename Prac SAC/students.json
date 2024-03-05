@@ -1,8 +1,0 @@
-{
-  "John Doe": {
-    "email": "john.doe@example.com",
-    "password": "password123",
-    "ID": "1234567890",
-    "role": "student"
-  }
-}
