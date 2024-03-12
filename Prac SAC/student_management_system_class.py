@@ -29,13 +29,21 @@ class StudentManagementSystem:
         with open(filename, "w") as file:
             json.dump(self.data, file)
 
-    def add_student(self, student):
+    def add_student(self, student, student_id):
         """
         Adds a student to the student management system.
 
         Args:
             student (Student): The student to add.
+            student_id (int): The ID of the student.
         """
+        if not isinstance(student_id, int):
+            try:
+                student_id = int(student_id)
+            except ValueError:
+                raise ValueError("student_id must be an integer")
+
+        student["id"] = student_id
         self.data["students"].append(student)
 
     def add_course(self, course):

@@ -24,7 +24,7 @@ def add_course():
 
 def add_student():
     """adds a student to the system."""
-    student_id = input("Enter the student ID: ")
+    student_id = int(input("Enter the student ID: "))
     student_name = input("Enter the student name: ")
     sms_instance.add_student(student_id, student_name)
     print(f"Student {student_id} has been added to the system.")
