@@ -38,7 +38,7 @@ class ProfitCalculator:
 
 
 while True:
-    csv_file_path = input("Enter CSV file path:")
+    csv_file_path = input("Enter CSV file path: ")
     # Create an instance of the ProfitCalculator class
     calculator = ProfitCalculator(csv_file_path)
     # Call the calculate_profit method to perform the calculations and display the results
