@@ -1,11 +1,27 @@
+# t = int(input("What is the temperature: "))
+# if t > 35:
+#     x = "Very hot"
+# elif t > 25:
+#     x = "Warm"
+# elif t > 20:
+#     x = "Perfect"
+# elif t < 20:
+#     x = "Cold"
+# else:
+#     print("Invalid input")
+
+
 t = int(input("What is the temperature: "))
 if t > 35:
-    x = "very hot"
-elif t > 25:
-    x = "warm"
-elif t > 20:
-    x = "perfect"
-elif t < 20:
-    x = "cold"
+    x = "Very hot"
 else:
-    print("invalid input")
+    if t > 25:
+        x = "Warm"
+    else:
+        if t > 20:
+            x = "Perfect"
+        else:
+            if t < 20:
+                x = "Cold"
+            else:
+                print("Invalid input")
