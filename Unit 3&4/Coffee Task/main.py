@@ -80,21 +80,8 @@ def select_coffee(coffee_selection_num):
     Returns:
         string: The name of the coffee selected.
     """
-    match coffee_selection_num:
-        case 1:
-            return "Espresso"
-        case 2:
-            return "Americano"
-        case 3:
-            return "Latte"
-        case 4:
-            return "Cappuccino"
-        case 5:
-            return "Macchiato"
-        case 6:
-            return "Mocha"
-        case 7:
-            return "Flat White"
+    coffee_list = list(coffee_prices.keys())
+    return coffee_list[coffee_selection_num - 1]
 
 
 def select_coffee_size(coffee_selection):
