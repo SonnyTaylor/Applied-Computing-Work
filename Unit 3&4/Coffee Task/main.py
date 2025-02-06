@@ -44,6 +44,7 @@ def print_border(text, width=35):
 
 
 def print_menu():
+    """Prints the coffee shop menu."""
     clear_terminal()
     print("\n")
     print_border("The Coffee Shop")
@@ -64,6 +65,11 @@ def print_menu():
 
 
 def get_coffee_choice():
+    """Prompts the user to select a coffee.
+
+    Returns:
+        int: The user's coffee selection
+    """
     while True:
         try:
             choice = int(input(Fore.YELLOW + "\nWhat coffee would you like? (1-7): "))
@@ -75,6 +81,14 @@ def get_coffee_choice():
 
 
 def select_coffee(coffee_selection_num):
+    """Returns the name of the coffee based on the selection number.
+
+    Args:
+        coffee_selection_num (int): The user's coffee selection number.
+
+    Returns:
+        string: The name of the coffee selected.
+    """
     match coffee_selection_num:
         case 1:
             return "Espresso"
@@ -93,6 +107,14 @@ def select_coffee(coffee_selection_num):
 
 
 def select_coffee_size(coffee_selection):
+    """Prompts the user to select a coffee size.
+
+    Args:
+        coffee_selection (string): The name of the coffee selected.
+
+    Returns:
+        string: The size of the coffee
+    """
     while True:
         print("\n" + Fore.CYAN + "Choose your Coffee Size:")
         print(Fore.GREEN + " M - Medium (No Extra)")
@@ -108,6 +130,11 @@ def select_coffee_size(coffee_selection):
 
 
 def eat_in_or_takeaway():
+    """Prompts the user to select whether the coffee is for takeaway or eat in.
+
+    Returns:
+        string: The type of order (Takeaway or Eat in)
+    """
     while True:
         response = input(
             Fore.YELLOW + "Would you like your coffee for takeaway? (Yes/No): "
@@ -119,6 +146,7 @@ def eat_in_or_takeaway():
 
 
 def main():
+    """Main function to run the coffee shop program."""
     print_menu()
     try:
         num_cups = int(input(Fore.YELLOW + "How many coffees are being ordered? "))
@@ -130,6 +158,7 @@ def main():
     order_details = []  # Store details for each order
 
     for i in range(num_cups):
+        # Get coffee choice, size, and order type
         print(Fore.BLUE + f"\nEntering details for coffee #{i+1}:")
         coffee_choice_num = get_coffee_choice()
         coffee_choice = select_coffee(coffee_choice_num)
