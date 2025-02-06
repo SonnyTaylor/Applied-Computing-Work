@@ -93,6 +93,7 @@ def select_coffee_size(coffee_selection):
     Returns:
         string: The size of the coffee
     """
+    size_dict = {"M": "Medium", "L": "Large", "XL": "XL"}
     while True:
         print("\n" + Fore.CYAN + "Choose your Coffee Size:")
         print(Fore.GREEN + " M - Medium (No Extra)")
@@ -101,8 +102,8 @@ def select_coffee_size(coffee_selection):
         size_input = input(
             Fore.YELLOW + f"What size for {coffee_selection}? (M, L, XL): "
         ).upper()
-        if size_input in ["M", "L", "XL"]:
-            return {"M": "Medium", "L": "Large", "XL": "XL"}[size_input]
+        if size_input in size_dict:
+            return size_dict[size_input]
         else:
             print(Fore.RED + "Invalid selection. Please try again.")
 
@@ -115,7 +116,7 @@ def eat_in_or_takeaway():
     """
     while True:
         response = input(
-            Fore.YELLOW + "Would you like your coffee for takeaway? (Yes/No): "
+            Fore.YELLOW + "Would you like your coffee for takeaway? (yes/no): "
         ).lower()
         if response in ["yes", "no"]:
             return "Takeaway" if response == "yes" else "Eat in"
