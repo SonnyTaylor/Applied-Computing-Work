@@ -50,17 +50,8 @@ def print_menu():
     print_border("The Coffee Shop")
     print(Fore.YELLOW + Style.BRIGHT + "\n             Welcome!\n")
     print("We serve the following coffees:")
-    coffees = [
-        "1. Espresso",
-        "2. Americano",
-        "3. Latte",
-        "4. Cappuccino",
-        "5. Macchiato",
-        "6. Mocha",
-        "7. Flat White",
-    ]
-    for coffee in coffees:
-        print(Fore.GREEN + " > " + coffee)
+    for i, (coffee, price) in enumerate(coffee_prices.items(), start=1):
+        print(Fore.GREEN + f" > {i}. {coffee} - ${price:.2f}")
     print("-" * 40)
 
 
