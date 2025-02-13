@@ -14,7 +14,8 @@ def divide(x, y):
     try:
         return x / y
     except ZeroDivisionError:
-        return "Cannot divide by zero"
+        print("Cannot divide by zero")
+        return None
 
 
 def main():
@@ -26,8 +27,12 @@ def main():
 
     choice = input("Enter choice (1/2/3/4): ")
 
-    num1 = float(input("Enter first number: "))
-    num2 = float(input("Enter second number: "))
+    try:
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+    except ValueError:
+        print("Invalid input. Please enter numeric values.")
+        return
 
     if choice == "1":
         print(f"The result is: {add(num1, num2)}")
