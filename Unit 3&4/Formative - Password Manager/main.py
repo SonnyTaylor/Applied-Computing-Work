@@ -3,7 +3,7 @@ import getpass
 import random
 import string
 
-import pyfiglet
+import pyfiglet  # type: ignore
 
 
 def create_password_file(logs=False):
@@ -158,78 +158,82 @@ def title(text, figlet_font="chunky"):
     print(ascii_title)
 
 
+def main_menu():
+    """Displays the main menu and handles user input."""
+    while True:
+        print("\n=== Main Menu ===")
+        print("1. Create a new user account")
+        print("2. Login")
+        print("3. Exit")
+        try:
+            choice = int(input("Enter your choice (1-3): "))
+        except ValueError:
+            print("Invalid choice. Please enter a number between 1 and 3.")
+            continue
+        if choice == 1:
+            create_user_account()
+        elif choice == 2:
+            if user_login():
+                print("Login successful.")
+                user_menu()
+            else:
+                print("Login failed. Please check your username and password.")
+        elif choice == 3:
+            print("Exiting...")
+            exit(0)
+        else:
+            print("Invalid choice. Please enter a number between 1 and 3.")
+
+
+def user_menu():
+    """Displays the user menu and handles user input."""
+    while True:
+        print("\n=== User Menu ===")
+        print("1. Generate a new password")
+        print("2. Store a password")
+        print("3. Retrieve a password")
+        print("4. Update a password")
+        print("5. Logout")
+        try:
+            user_choice = int(input("Enter your choice (1-5): "))
+        except ValueError:
+            print("Invalid choice. Please enter a number between 1 and 5.")
+            continue
+        if user_choice == 1:
+            length = int(input("Enter password length: "))
+            complexity = int(input("Enter complexity (1-3): "))
+            print(f"Generated password: {generate_password(length, complexity)}")
+        elif user_choice == 2:
+            account_name = input("Enter account name: ")
+            password = getpass.getpass("Enter password: ")
+            store_password(account_name, password)
+            print("Password stored successfully.")
+        elif user_choice == 3:
+            account_name = input("Enter account name: ")
+            password = retrieve_password(account_name)
+            if password:
+                print(f"Password for {account_name}: {password}")
+            else:
+                print("Account not found.")
+        elif user_choice == 4:
+            account_name = input("Enter account name: ")
+            new_password = getpass.getpass("Enter new password: ")
+            update_password(account_name, new_password)
+            print("Password updated successfully.")
+        elif user_choice == 5:
+            print("Logging out...")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 5.")
+
+
 def main():
     """Main function to run the password manager program."""
     try:
         create_password_file()
         create_user_file()
         title("Password Manager", figlet_font="chunky")
-        while True:
-            print("\n=== Main Menu ===")
-            print("1. Create a new user account")
-            print("2. Login")
-            print("3. Exit")
-            try:
-                choice = int(input("Enter your choice (1-3): "))
-            except ValueError:
-                print("Invalid choice. Please enter a number between 1 and 3.")
-                continue
-            if choice == 1:
-                create_user_account()
-            elif choice == 2:
-                if user_login():
-                    print("Login successful.")
-                    while True:
-                        print("\n=== User Menu ===")
-                        print("1. Generate a new password")
-                        print("2. Store a password")
-                        print("3. Retrieve a password")
-                        print("4. Update a password")
-                        print("5. Logout")
-                        try:
-                            user_choice = int(input("Enter your choice (1-5): "))
-                        except ValueError:
-                            print(
-                                "Invalid choice. Please enter a number between 1 and 5."
-                            )
-                            continue
-                        if user_choice == 1:
-                            length = int(input("Enter password length: "))
-                            complexity = int(input("Enter complexity (1-3): "))
-                            print(
-                                f"Generated password: {generate_password(length, complexity)}"
-                            )
-                        elif user_choice == 2:
-                            account_name = input("Enter account name: ")
-                            password = getpass.getpass("Enter password: ")
-                            store_password(account_name, password)
-                            print("Password stored successfully.")
-                        elif user_choice == 3:
-                            account_name = input("Enter account name: ")
-                            password = retrieve_password(account_name)
-                            if password:
-                                print(f"Password for {account_name}: {password}")
-                            else:
-                                print("Account not found.")
-                        elif user_choice == 4:
-                            account_name = input("Enter account name: ")
-                            new_password = getpass.getpass("Enter new password: ")
-                            update_password(account_name, new_password)
-                            print("Password updated successfully.")
-                        elif user_choice == 5:
-                            print("Logging out...")
-                            break
-                        else:
-                            print(
-                                "Invalid choice. Please enter a number between 1 and 5."
-                            )
-                else:
-                    print("Login failed. Please check your username and password.")
-            elif choice == 3:
-                print("Exiting...")
-                exit(0)
-            else:
-                print("Invalid choice. Please enter a number between 1 and 3.")
+        main_menu()
     except KeyboardInterrupt:
         print("\nExiting...")
         exit(0)
