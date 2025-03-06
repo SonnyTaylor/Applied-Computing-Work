@@ -30,3 +30,33 @@ def quicksort(array):
 numbers = [10, 7, 8, 9, 1, 5]
 sorted_numbers = quicksort(numbers)
 print(sorted_numbers)
+
+"""
+PSEUDOCODE
+
+BEGIN quicksort(array)
+	IF LEN(array) <= 1 THEN
+		RETURN array
+	ENDIF
+    
+    pivot ← array[-1]
+    left ← []
+    middle ← []
+    right ← []
+    
+    FOR each IN array DO
+        IF each < pivot THEN
+            APPEND each TO left
+        ELSE IF each = pivot THEN
+            APPEND each TO middle
+        ELSE
+            APPEND each TO right
+        ENDIF
+    ENDFOR
+	
+	left_sorted ← quicksort(left)
+	right_sorted ← quicksort(right)
+	
+	RETURN left_sorted + middle + right_sorted
+
+"""
