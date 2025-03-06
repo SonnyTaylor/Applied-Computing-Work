@@ -1,0 +1,14 @@
+BEGIN
+    FUNCTION selection_sort(array):
+        FOR each IN RANGE(length (array) -1)
+            min_index<each
+            FOR current_value IN RANGE(each+1, length(array))
+                IF array[min_index]>array[current_value] THEN
+                    min_index < current_value
+                END IF
+            END FOR
+            temp < array[each]
+            array[each] < array[min_index]
+            array[min_index] < temp
+        END FOR
+END
