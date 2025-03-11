@@ -138,7 +138,7 @@ def main():
 
     for i in range(num_cups):
         # Get coffee choice, size, and order type
-        print(Fore.BLUE + f"\nEntering details for coffee #{i+1}:")
+        print(Fore.BLUE + f"\nEntering details for coffee #{i + 1}:")
         coffee_choice_num = get_coffee_choice()
         coffee_choice = select_coffee(coffee_choice_num)
         coffee_size = select_coffee_size(coffee_choice)
