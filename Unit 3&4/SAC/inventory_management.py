@@ -1,5 +1,5 @@
-from pathlib import Path
 import csv
+from pathlib import Path
 from search_sort import binary_search
 
 
@@ -25,16 +25,23 @@ def get_inventory():
     try:
         with open("inventory.csv", "r") as file:
             reader = csv.reader(file)
+            next(reader)  # Skip the header row
             return list(reader)
     except Exception as e:
         return f"An error occurred: {e}"
 
 
 def add_inventory(name, quantity, date_added):
+    if not inventory_file_existance():
+        make_inventory_file()
     fields = [name, quantity, date_added]
-    with open(r"inventory.csv", "a") as file:
-        writer = csv.writer(file)
-        writer.writerow(fields)
+    try:
+        with open("inventory.csv", "a", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow(fields)
+    except Exception as e:
+        return f"An error occurred: {e}"
+    return "Inventory added successfully"
 
 
 def search_inventory(target_name, filename="inventory.csv"):
