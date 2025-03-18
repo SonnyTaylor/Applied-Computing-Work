@@ -44,7 +44,6 @@ def main_menu():
             pass
         case 5:
             print("Goodbye!")
-            sys.exit(0)
 
 
 def view_inventory():

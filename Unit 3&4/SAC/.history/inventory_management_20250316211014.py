@@ -24,7 +24,6 @@ def get_inventory():
     try:
         with open("inventory.csv", "r") as file:
             reader = csv.reader(file)
-            next(reader)  # Skip the header row
             return list(reader)
     except Exception as e:
         return f"An error occurred: {e}"

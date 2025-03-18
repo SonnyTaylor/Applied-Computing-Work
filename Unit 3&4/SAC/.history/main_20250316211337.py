@@ -16,7 +16,7 @@ def main_menu():
 
     while True:
         try:
-            main_option = input("Pick an option (1-5): ")
+            main_option = input("Pick an option (1-4): ")
 
             # Check if input is empty
             if not main_option:
@@ -25,7 +25,7 @@ def main_menu():
 
             # Convert to integer and check range
             main_option = int(main_option)
-            if main_option < 1 or main_option > 5:
+            if main_option < 1 or main_option > 4:
                 print("Please enter a number between 1 and 4")
                 continue
 
@@ -42,9 +42,6 @@ def main_menu():
             remove_inventory()
         case 4:
             pass
-        case 5:
-            print("Goodbye!")
-            sys.exit(0)
 
 
 def view_inventory():
