@@ -38,15 +38,6 @@ def add_inventory(name, quantity, date_added):
 
 
 def search_inventory(target_name, filename="inventory.csv"):
-    """Searches through the inventory for a certain item name and uses binary search to find it
-
-    Args:
-        target_name (str): The name of the item to search for
-        filename (str, optional): the csv file name. Defaults to "inventory.csv".
-
-    Returns:
-        str: Item and its details
-    """
     # i got help from copilot here
     # Open the CSV file and read its contents
     with open(filename, mode="r", newline="") as csvfile:
@@ -76,15 +67,10 @@ def remove_inventory():
     pass
 
 
-def view_inventory(filename="inventory.csv"):
-    """Returns contents of csv file
-
-    Returns:
-        string: A string of the entire csv file
-    """
+def view_inventory():
     try:
         # Attempt to open the inventory CSV file in read mode
-        with open(filename, "r") as file:
+        with open("inventory.csv", "r") as file:
             # Read the entire contents of the file
             content = file.read()
         # Return the contents of the file

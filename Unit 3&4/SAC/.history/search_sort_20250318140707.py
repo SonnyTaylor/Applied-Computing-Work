@@ -12,25 +12,3 @@ def quicksort(arr):
 
         # Recursively sort the sub-arrays and concatenate with the pivot
         return quicksort(less_than_pivot) + [pivot] + quicksort(greater_than_pivot)
-
-
-def binary_search(arr, target):
-    left, right = 0, len(arr) - 1
-
-    while left <= right:
-        mid = (left + right) // 2
-
-        # Check if target is present at mid
-        if arr[mid] == target:
-            return mid
-
-        # If target is greater, ignore left half
-        elif arr[mid] < target:
-            left = mid + 1
-
-        # If target is smaller, ignore right half
-        else:
-            right = mid - 1
-
-    # Target is not present in the array
-    return -1
