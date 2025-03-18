@@ -1,5 +1,5 @@
-import csv
 from pathlib import Path
+import csv
 
 
 def make_inventory_file():
@@ -24,23 +24,16 @@ def get_inventory():
     try:
         with open("inventory.csv", "r") as file:
             reader = csv.reader(file)
-            next(reader)  # Skip the header row
             return list(reader)
     except Exception as e:
         return f"An error occurred: {e}"
 
 
 def add_inventory(name, quantity, date_added):
-    if not inventory_file_existance():
-        make_inventory_file()
     fields = [name, quantity, date_added]
-    try:
-        with open("inventory.csv", "a", newline="") as file:
-            writer = csv.writer(file)
-            writer.writerow(fields)
-    except Exception as e:
-        return f"An error occurred: {e}"
-    return "Inventory added successfully"
+    with open(r"inventory.csv", "a") as file:
+        writer = csv.writer(file)
+        writer.writerow(fields)
 
 
 def search_inventory():
