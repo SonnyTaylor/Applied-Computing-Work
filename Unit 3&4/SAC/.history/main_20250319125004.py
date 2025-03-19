@@ -31,7 +31,7 @@ def print_menu_header(title):
 def create_menu_table():
     """Create a table for the main menu"""
     table = Table(show_header=False, box=None, padding=(0, 2))
-    table.add_row("1. 📋", "View/Open Inventory")
+    table.add_row("1. 📋", "View Inventory")
     table.add_row("2. ➕", "Add New Item")
     table.add_row("3. ❌", "Remove Item")
     table.add_row("4. 🔍", "Search Inventory")
@@ -89,41 +89,8 @@ def view_inventory():
         choice = Prompt.ask("\nEnter your choice", choices=["1", "2", "3"])
 
         if choice == "1":
-            # Ask if user wants to sort first
-            if Confirm.ask("\nWould you like to sort the inventory before viewing?"):
-                print_header()
-                print_menu_header("SORT INVENTORY")
-
-                sort_table = Table(show_header=False, box=None, padding=(0, 2))
-                sort_table.add_row("1. 📝", "Sort by Name")
-                sort_table.add_row("2. 🔢", "Sort by Quantity")
-                sort_table.add_row("3. 📅", "Sort by Date Added")
-                sort_table.add_row("4. 💰", "Sort by Price")
-                console.print(sort_table)
-
-                try:
-                    sort_option = Prompt.ask(
-                        "\nEnter your choice", choices=["1", "2", "3", "4"]
-                    )
-
-                    if sort_option == "1":
-                        inventory_manager.sort_by_name()
-                    elif sort_option == "2":
-                        inventory_manager.sort_by_quantity()
-                    elif sort_option == "3":
-                        inventory_manager.sort_by_date_added()
-                    elif sort_option == "4":
-                        inventory_manager.sort_by_price()
-                    console.print("\n✅ Inventory sorted successfully!", style="green")
-                except Exception as e:
-                    console.print(f"\n❌ Error sorting inventory: {e}", style="red")
-                    if not Confirm.ask(
-                        "\nWould you like to continue viewing unsorted inventory?"
-                    ):
-                        continue
-
             console.print("\n📋 Current Inventory:", style="bold")
-            items = inventory_manager.get_all_items()
+            items = inventory_manager.view_inventory()
 
             if not items:
                 console.print("\n📭 Inventory is empty", style="yellow")
@@ -157,10 +124,14 @@ def view_inventory():
                 table.add_column("Price", style="yellow", justify="right")
                 table.add_column("Total", style="blue", justify="right")
                 table.add_column("Date Added", style="dim", width=20)
+                table.add_column("Status", style="red", width=10)
 
                 # Add rows
                 for idx, item in enumerate(items, 1):
                     total = item.quantity * item.price
+                    status = "⚠️ Low" if item.quantity < 10 else "✅ OK"
+                    status_style = "red" if item.quantity < 10 else "green"
+
                     table.add_row(
                         str(idx),
                         item.name,
@@ -168,6 +139,8 @@ def view_inventory():
                         f"${item.price:.2f}",
                         f"${total:,.2f}",
                         item.date_added,
+                        status,
+                        style=status_style if item.quantity < 10 else None,
                     )
 
                 console.print(Panel(table, title="Inventory List", border_style="blue"))
@@ -298,70 +271,22 @@ def remove_inventory():
 
 
 def search_inventory():
-    while True:
-        print_header()
-        print_menu_header("SEARCH INVENTORY")
-        console.print(
-            Panel("Enter the name of the item you want to search:", style="bold")
-        )
+    print_header()
+    print_menu_header("SEARCH INVENTORY")
+    console.print(Panel("Enter the name of the item you want to search:", style="bold"))
 
-        name = Prompt.ask("\n🔍 Enter item name to search").strip()
-        if not name:
-            console.print("\n❌ Search term cannot be empty.", style="red")
-            if not Confirm.ask("\nWould you like to try another search?"):
-                break
-            continue
-
-        items = inventory_manager.search_item(name)
-        if not items:
-            console.print("\n❌ No items found matching your search.", style="yellow")
-            if not Confirm.ask("\nWould you like to try another search?"):
-                break
-            continue
-
-        # Create a table for search results
-        table = Table(
-            show_header=True,
-            header_style="bold magenta",
-            border_style="blue",
-            box=None,
-            padding=(0, 2),
-            row_styles=["", "dim"],
-        )
-
-        # Add columns
-        table.add_column("#", style="dim", justify="right", width=4)
-        table.add_column("Name", style="cyan", width=30)
-        table.add_column("Quantity", style="green", justify="right")
-        table.add_column("Price", style="yellow", justify="right")
-        table.add_column("Total", style="blue", justify="right")
-        table.add_column("Status", style="red", width=10)
-
-        # Add rows
-        for idx, item in enumerate(items, 1):
-            total = item.quantity * item.price
-            status = "⚠️ Low" if item.quantity < 10 else "✅ OK"
-            status_style = "red" if item.quantity < 10 else "green"
-
-            table.add_row(
-                str(idx),
-                item.name,
-                str(item.quantity),
-                f"${item.price:.2f}",
-                f"${total:,.2f}",
-                status,
-                style=status_style if item.quantity < 10 else None,
-            )
-
-        console.print(
-            f"\n✅ Found {len(items)} matching item{'s' if len(items) != 1 else ''}:",
-            style="green",
-        )
-        console.print(Panel(table, title="Search Results", border_style="blue"))
-
-        if not Confirm.ask("\nWould you like to try another search?"):
-            break
-
+    name = Prompt.ask("\n🔍 Enter item name to search")
+    item = inventory_manager.search_item(name)
+    if item:
+        table = Table(show_header=False, box=None, padding=(0, 2))
+        table.add_row("📝 Name:", item.name)
+        table.add_row("🔢 Quantity:", str(item.quantity))
+        table.add_row("💰 Price:", f"${item.price:.2f}")
+        table.add_row("📅 Date Added:", item.date_added)
+        console.print("\n✅ Found item:", style="green")
+        console.print(Panel(table, title="Item Details", border_style="blue"))
+    else:
+        console.print("\n❌ Item not found.", style="red")
     main_menu()
 
 

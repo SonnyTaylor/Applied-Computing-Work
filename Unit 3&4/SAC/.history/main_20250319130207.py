@@ -31,7 +31,7 @@ def print_menu_header(title):
 def create_menu_table():
     """Create a table for the main menu"""
     table = Table(show_header=False, box=None, padding=(0, 2))
-    table.add_row("1. 📋", "View/Open Inventory")
+    table.add_row("1. 📋", "View Inventory")
     table.add_row("2. ➕", "Add New Item")
     table.add_row("3. ❌", "Remove Item")
     table.add_row("4. 🔍", "Search Inventory")
