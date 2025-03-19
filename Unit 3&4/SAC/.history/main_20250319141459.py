@@ -307,27 +307,28 @@ def search_inventory():
         field_table.add_row("1. 📝", "Search by Name")
         field_table.add_row("2. 🔢", "Search by Quantity")
         field_table.add_row("3. 💰", "Search by Price")
-        field_table.add_row("4. 🔙", "Back to Main Menu")
+        field_table.add_row("4. 📅", "Search by Date Added")
+        field_table.add_row("5. 🔍", "Advanced Search (Multiple Criteria)")
+        field_table.add_row("6. 🔙", "Back to Main Menu")
         console.print(field_table)
 
         try:
             field_choice = Prompt.ask(
-                "\nSelect search field", choices=["1", "2", "3", "4"]
+                "\nSelect search field", choices=["1", "2", "3", "4", "5", "6"]
             )
 
-            if field_choice == "4":
+            if field_choice == "6":
                 break
-
-            search_term = Prompt.ask("\n🔍 Enter search term").strip()
-            if not search_term:
-                console.print("\n❌ Search term cannot be empty.", style="red")
-                if not Confirm.ask("\nWould you like to try another search?"):
-                    break
-                continue
 
             items = []
             if field_choice == "1":
                 # Search by name
+                search_term = Prompt.ask("\n🔍 Enter search term").strip()
+                if not search_term:
+                    console.print("\n❌ Search term cannot be empty.", style="red")
+                    if not Confirm.ask("\nWould you like to try another search?"):
+                        break
+                    continue
                 items = [
                     item
                     for item in inventory_manager.items
@@ -336,35 +337,137 @@ def search_inventory():
             elif field_choice == "2":
                 # Search by quantity
                 try:
-                    search_quantity = int(search_term)
-                    items = [
-                        item
-                        for item in inventory_manager.items
-                        if item.quantity == search_quantity
-                    ]
-                except ValueError:
-                    console.print(
-                        "\n❌ Please enter a valid number for quantity.", style="red"
+                    search_type = Prompt.ask(
+                        "\nSelect search type", choices=["1", "2"], default="1"
                     )
+                    if search_type == "1":
+                        # Exact quantity
+                        search_quantity = int(Prompt.ask("Enter quantity"))
+                        items = [
+                            item
+                            for item in inventory_manager.items
+                            if item.quantity == search_quantity
+                        ]
+                    else:
+                        # Quantity range
+                        min_qty = int(Prompt.ask("Enter minimum quantity"))
+                        max_qty = int(Prompt.ask("Enter maximum quantity"))
+                        items = inventory_manager.search_by_quantity_range(
+                            min_qty, max_qty
+                        )
+                except ValueError:
+                    console.print("\n❌ Please enter valid numbers.", style="red")
                     if not Confirm.ask("\nWould you like to try another search?"):
                         break
                     continue
             elif field_choice == "3":
                 # Search by price
                 try:
-                    search_price = float(search_term)
-                    items = [
-                        item
-                        for item in inventory_manager.items
-                        if item.price == search_price
-                    ]
+                    search_type = Prompt.ask(
+                        "\nSelect search type", choices=["1", "2"], default="1"
+                    )
+                    if search_type == "1":
+                        # Exact price
+                        search_price = float(Prompt.ask("Enter price"))
+                        items = [
+                            item
+                            for item in inventory_manager.items
+                            if item.price == search_price
+                        ]
+                    else:
+                        # Price range
+                        min_price = float(Prompt.ask("Enter minimum price"))
+                        max_price = float(Prompt.ask("Enter maximum price"))
+                        items = inventory_manager.search_by_price_range(
+                            min_price, max_price
+                        )
+                except ValueError:
+                    console.print("\n❌ Please enter valid numbers.", style="red")
+                    if not Confirm.ask("\nWould you like to try another search?"):
+                        break
+                    continue
+            elif field_choice == "4":
+                # Search by date
+                try:
+                    start_date = Prompt.ask("Enter start date (YYYY-MM-DD)")
+                    end_date = Prompt.ask("Enter end date (YYYY-MM-DD)")
+                    items = inventory_manager.search_by_date_range(start_date, end_date)
                 except ValueError:
                     console.print(
-                        "\n❌ Please enter a valid number for price.", style="red"
+                        "\n❌ Please enter valid dates in YYYY-MM-DD format.",
+                        style="red",
                     )
                     if not Confirm.ask("\nWould you like to try another search?"):
                         break
                     continue
+            elif field_choice == "5":
+                # Advanced search with multiple criteria
+                criteria = {}
+                while True:
+                    criterion = Prompt.ask(
+                        "\nSelect criterion to add",
+                        choices=["1", "2", "3", "4", "5"],
+                        default="5",
+                    )
+                    if criterion == "5":
+                        break
+
+                    if criterion == "1":
+                        # Name criterion
+                        name_term = Prompt.ask("Enter name to search for")
+                        criteria["name"] = name_term
+                    elif criterion == "2":
+                        # Quantity criterion
+                        try:
+                            search_type = Prompt.ask(
+                                "Select search type", choices=["1", "2"], default="1"
+                            )
+                            if search_type == "1":
+                                qty = int(Prompt.ask("Enter quantity"))
+                                criteria["quantity"] = qty
+                            else:
+                                min_qty = int(Prompt.ask("Enter minimum quantity"))
+                                max_qty = int(Prompt.ask("Enter maximum quantity"))
+                                criteria["quantity"] = (min_qty, max_qty)
+                        except ValueError:
+                            console.print(
+                                "\n❌ Please enter valid numbers.", style="red"
+                            )
+                            continue
+                    elif criterion == "3":
+                        # Price criterion
+                        try:
+                            search_type = Prompt.ask(
+                                "Select search type", choices=["1", "2"], default="1"
+                            )
+                            if search_type == "1":
+                                price = float(Prompt.ask("Enter price"))
+                                criteria["price"] = price
+                            else:
+                                min_price = float(Prompt.ask("Enter minimum price"))
+                                max_price = float(Prompt.ask("Enter maximum price"))
+                                criteria["price"] = (min_price, max_price)
+                        except ValueError:
+                            console.print(
+                                "\n❌ Please enter valid numbers.", style="red"
+                            )
+                            continue
+                    elif criterion == "4":
+                        # Date criterion
+                        start_date = Prompt.ask("Enter start date (YYYY-MM-DD)")
+                        end_date = Prompt.ask("Enter end date (YYYY-MM-DD)")
+                        criteria["date"] = (start_date, end_date)
+
+                    if not Confirm.ask("\nWould you like to add another criterion?"):
+                        break
+
+                if not criteria:
+                    console.print("\n❌ No criteria selected.", style="red")
+                    if not Confirm.ask("\nWould you like to try another search?"):
+                        break
+                    continue
+
+                items = inventory_manager.search_by_multiple_criteria(criteria)
 
             if not items:
                 console.print(
@@ -390,6 +493,7 @@ def search_inventory():
             table.add_column("Quantity", style="green", justify="right")
             table.add_column("Price", style="yellow", justify="right")
             table.add_column("Total", style="blue", justify="right")
+            table.add_column("Date Added", style="dim", width=20)
 
             # Add rows
             for idx, item in enumerate(items, 1):
@@ -400,6 +504,7 @@ def search_inventory():
                     str(item.quantity),
                     f"${item.price:.2f}",
                     f"${total:,.2f}",
+                    item.date_added,
                 )
 
             console.print(

@@ -10,6 +10,10 @@ from rich.prompt import Prompt, Confirm
 from rich.layout import Layout
 from rich.text import Text
 from rich import print as rprint
+from rich.align import Align
+from rich.style import Style
+from rich.live import Live
+from rich.spinner import Spinner
 
 # Create a global inventory manager instance
 inventory_manager = InventoryManager()
@@ -17,27 +21,96 @@ console = Console()
 
 
 def print_header():
-    """Print the application header"""
+    """Print the application header with enhanced styling"""
     clear_terminal()
-    title = Text("INVENTORY MANAGER", style="bold blue")
-    console.print(Panel(title, style="bold white", border_style="blue"))
+    # Create a more sophisticated header with multiple panels
+    header_text = Text("INVENTORY MANAGER", style="bold blue")
+    subtitle = Text("Professional Inventory Management System", style="italic dim")
+
+    # Create a main header panel
+    header_panel = Panel(
+        Align.center(Text.assemble(header_text, "\n", subtitle)),
+        style="bold white",
+        border_style="blue",
+        padding=(1, 2),
+        title="[bold blue]v1.0[/]",
+        subtitle="[dim]Press Ctrl+C to exit[/]",
+    )
+
+    console.print(header_panel)
+    console.print()
 
 
 def print_menu_header(title):
-    """Print a section header"""
-    console.print(Panel(title, style="bold green", border_style="green"))
+    """Print a section header with enhanced styling"""
+    console.print(
+        Panel(
+            Align.center(title),
+            style="bold green",
+            border_style="green",
+            padding=(0, 2),
+            box=None,
+        )
+    )
 
 
 def create_menu_table():
-    """Create a table for the main menu"""
-    table = Table(show_header=False, box=None, padding=(0, 2))
+    """Create a table for the main menu with enhanced styling"""
+    table = Table(
+        show_header=False,
+        box=None,
+        padding=(0, 2),
+        row_styles=["", "dim"],
+        style="bold",
+    )
+
+    # Add menu items with emojis and better spacing
     table.add_row("1. 📋", "View/Open Inventory")
     table.add_row("2. ➕", "Add New Item")
     table.add_row("3. ❌", "Remove Item")
     table.add_row("4. 🔍", "Search Inventory")
     table.add_row("5. 📊", "Sort Inventory")
     table.add_row("6. 🚪", "Exit")
-    return table
+
+    return Panel(
+        table, title="[bold blue]Main Menu[/]", border_style="blue", padding=(1, 2)
+    )
+
+
+def create_section_table(options):
+    """Create a generic section table with consistent styling"""
+    table = Table(
+        show_header=False,
+        box=None,
+        padding=(0, 2),
+        row_styles=["", "dim"],
+        style="bold",
+    )
+
+    for option in options:
+        table.add_row(option[0], option[1])
+
+    return Panel(table, border_style="blue", padding=(1, 2))
+
+
+def show_loading_spinner(message="Processing..."):
+    """Show a loading spinner for operations"""
+    with Live(Spinner("dots", text=message), refresh_per_second=10) as live:
+        live.update()
+
+
+def show_success_message(message):
+    """Show a success message with consistent styling"""
+    console.print(
+        Panel(f"✅ {message}", style="bold green", border_style="green", padding=(0, 2))
+    )
+
+
+def show_error_message(message):
+    """Show an error message with consistent styling"""
+    console.print(
+        Panel(f"❌ {message}", style="bold red", border_style="red", padding=(0, 2))
+    )
 
 
 def main_menu():
@@ -80,11 +153,12 @@ def view_inventory():
         print_header()
         print_menu_header("VIEW INVENTORY")
 
-        table = Table(show_header=False, box=None, padding=(0, 2))
-        table.add_row("1. 📱", "View in Console")
-        table.add_row("2. 💻", "Open in External Editor")
-        table.add_row("3. 🔙", "Back")
-        console.print(table)
+        options = [
+            ("1. 📱", "View in Console"),
+            ("2. 💻", "Open in External Editor"),
+            ("3. 🔙", "Back"),
+        ]
+        console.print(create_section_table(options))
 
         choice = Prompt.ask("\nEnter your choice", choices=["1", "2", "3"])
 
@@ -94,18 +168,20 @@ def view_inventory():
                 print_header()
                 print_menu_header("SORT INVENTORY")
 
-                sort_table = Table(show_header=False, box=None, padding=(0, 2))
-                sort_table.add_row("1. 📝", "Sort by Name")
-                sort_table.add_row("2. 🔢", "Sort by Quantity")
-                sort_table.add_row("3. 📅", "Sort by Date Added")
-                sort_table.add_row("4. 💰", "Sort by Price")
-                console.print(sort_table)
+                sort_options = [
+                    ("1. 📝", "Sort by Name"),
+                    ("2. 🔢", "Sort by Quantity"),
+                    ("3. 📅", "Sort by Date Added"),
+                    ("4. 💰", "Sort by Price"),
+                ]
+                console.print(create_section_table(sort_options))
 
                 try:
                     sort_option = Prompt.ask(
                         "\nEnter your choice", choices=["1", "2", "3", "4"]
                     )
 
+                    show_loading_spinner("Sorting inventory...")
                     if sort_option == "1":
                         inventory_manager.sort_by_name()
                     elif sort_option == "2":
@@ -114,9 +190,9 @@ def view_inventory():
                         inventory_manager.sort_by_date_added()
                     elif sort_option == "4":
                         inventory_manager.sort_by_price()
-                    console.print("\n✅ Inventory sorted successfully!", style="green")
+                    show_success_message("Inventory sorted successfully!")
                 except Exception as e:
-                    console.print(f"\n❌ Error sorting inventory: {e}", style="red")
+                    show_error_message(f"Error sorting inventory: {e}")
                     if not Confirm.ask(
                         "\nWould you like to continue viewing unsorted inventory?"
                     ):
@@ -126,21 +202,30 @@ def view_inventory():
             items = inventory_manager.get_all_items()
 
             if not items:
-                console.print("\n📭 Inventory is empty", style="yellow")
+                console.print(
+                    Panel(
+                        "📭 Inventory is empty", style="yellow", border_style="yellow"
+                    )
+                )
             else:
                 # Calculate summary information
                 total_items = sum(item.quantity for item in items)
                 total_value = sum(item.quantity * item.price for item in items)
 
-                # Create summary panel
+                # Create summary panel with enhanced styling
                 summary_table = Table(show_header=False, box=None, padding=(0, 2))
                 summary_table.add_row("📦 Total Items:", str(total_items))
                 summary_table.add_row("💰 Total Value:", f"${total_value:,.2f}")
                 console.print(
-                    Panel(summary_table, title="Summary", border_style="green")
+                    Panel(
+                        summary_table,
+                        title="[bold green]Summary[/]",
+                        border_style="green",
+                        padding=(1, 2),
+                    )
                 )
 
-                # Create main inventory table
+                # Create main inventory table with enhanced styling
                 table = Table(
                     show_header=True,
                     header_style="bold magenta",
@@ -148,9 +233,10 @@ def view_inventory():
                     box=None,
                     padding=(0, 2),
                     row_styles=["", "dim"],
+                    title="[bold blue]Inventory List[/]",
                 )
 
-                # Add columns
+                # Add columns with consistent styling
                 table.add_column("#", style="dim", justify="right", width=4)
                 table.add_column("Name", style="cyan", width=30)
                 table.add_column("Quantity", style="green", justify="right")
@@ -158,7 +244,7 @@ def view_inventory():
                 table.add_column("Total", style="blue", justify="right")
                 table.add_column("Date Added", style="dim", width=20)
 
-                # Add rows
+                # Add rows with alternating styles
                 for idx, item in enumerate(items, 1):
                     total = item.quantity * item.price
                     table.add_row(
@@ -170,15 +256,14 @@ def view_inventory():
                         item.date_added,
                     )
 
-                console.print(Panel(table, title="Inventory List", border_style="blue"))
+                console.print(Panel(table, border_style="blue", padding=(1, 2)))
         elif choice == "2":
             try:
                 webbrowser.open(inventory_manager.filename)
-                console.print("\n✅ File opened in external editor", style="green")
+                show_success_message("File opened in external editor")
             except OSError:
-                console.print(
-                    "\n❌ Error opening file externally. Please try viewing in console instead.",
-                    style="red",
+                show_error_message(
+                    "Error opening file externally. Please try viewing in console instead."
                 )
 
         elif choice == "3":

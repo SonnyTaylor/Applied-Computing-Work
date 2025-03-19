@@ -390,16 +390,22 @@ def search_inventory():
             table.add_column("Quantity", style="green", justify="right")
             table.add_column("Price", style="yellow", justify="right")
             table.add_column("Total", style="blue", justify="right")
+            table.add_column("Status", style="red", width=10)
 
             # Add rows
             for idx, item in enumerate(items, 1):
                 total = item.quantity * item.price
+                status = "⚠️ Low" if item.quantity < 10 else "✅ OK"
+                status_style = "red" if item.quantity < 10 else "green"
+
                 table.add_row(
                     str(idx),
                     item.name,
                     str(item.quantity),
                     f"${item.price:.2f}",
                     f"${total:,.2f}",
+                    status,
+                    style=status_style if item.quantity < 10 else None,
                 )
 
             console.print(
