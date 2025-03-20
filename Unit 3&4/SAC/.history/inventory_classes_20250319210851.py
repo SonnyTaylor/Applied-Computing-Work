@@ -47,7 +47,7 @@ class InventoryManager:
         try:
             with open(self.filename, "x", newline="") as file:
                 writer = csv.writer(file)
-                writer.writerow(["name", "quantity", "price", "date added", "in stock"])
+                writer.writerow(["name", "quantity", "price", "date added"])
         except FileExistsError:
             pass
 
@@ -66,8 +66,7 @@ class InventoryManager:
         try:
             with open(self.filename, "w", newline="") as file:
                 writer = csv.DictWriter(
-                    file,
-                    fieldnames=["name", "quantity", "price", "date added", "in stock"],
+                    file, fieldnames=["name", "quantity", "price", "date added"]
                 )
                 writer.writeheader()
                 writer.writerows([item.to_dict() for item in self.items])

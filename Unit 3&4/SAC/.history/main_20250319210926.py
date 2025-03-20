@@ -156,21 +156,17 @@ def view_inventory():
                 table.add_column("Quantity", style="green", justify="right")
                 table.add_column("Price", style="yellow", justify="right")
                 table.add_column("Total", style="blue", justify="right")
-                table.add_column("Status", style="bold", justify="center", width=10)
                 table.add_column("Date Added", style="dim", width=20)
 
                 # Add rows
                 for idx, item in enumerate(items, 1):
                     total = item.quantity * item.price
-                    status = "✅ In Stock" if item.in_stock else "❌ Out of Stock"
-                    status_style = "green" if item.in_stock else "red"
                     table.add_row(
                         str(idx),
                         item.name,
                         str(item.quantity),
                         f"${item.price:.2f}",
                         f"${total:,.2f}",
-                        Text(status, style=status_style),
                         item.date_added,
                     )
 
@@ -311,34 +307,23 @@ def search_inventory():
         field_table.add_row("1. 📝", "Search by Name")
         field_table.add_row("2. 🔢", "Search by Quantity")
         field_table.add_row("3. 💰", "Search by Price")
-        field_table.add_row("4. 📦", "Search by Stock Status")
-        field_table.add_row("5. 🔙", "Back to Main Menu")
+        field_table.add_row("4. 🔙", "Back to Main Menu")
         console.print(field_table)
 
         try:
             field_choice = Prompt.ask(
-                "\nSelect search field", choices=["1", "2", "3", "4", "5"]
+                "\nSelect search field", choices=["1", "2", "3", "4"]
             )
 
-            if field_choice == "5":
+            if field_choice == "4":
                 break
 
-            if field_choice == "4":
-                # Search by stock status
-                status_table = Table(show_header=False, box=None, padding=(0, 2))
-                status_table.add_row("1. ✅", "In Stock")
-                status_table.add_row("2. ❌", "Out of Stock")
-                console.print(status_table)
-
-                status_choice = Prompt.ask("\nSelect status", choices=["1", "2"])
-                search_term = "True" if status_choice == "1" else "False"
-            else:
-                search_term = Prompt.ask("\n🔍 Enter search term").strip()
-                if not search_term:
-                    console.print("\n❌ Search term cannot be empty.", style="red")
-                    if not Confirm.ask("\nWould you like to try another search?"):
-                        break
-                    continue
+            search_term = Prompt.ask("\n🔍 Enter search term").strip()
+            if not search_term:
+                console.print("\n❌ Search term cannot be empty.", style="red")
+                if not Confirm.ask("\nWould you like to try another search?"):
+                    break
+                continue
 
             items = []
             if field_choice == "1":
@@ -380,13 +365,6 @@ def search_inventory():
                     if not Confirm.ask("\nWould you like to try another search?"):
                         break
                     continue
-            elif field_choice == "4":
-                # Search by stock status
-                items = [
-                    item
-                    for item in inventory_manager.items
-                    if str(item.in_stock) == search_term
-                ]
 
             if not items:
                 console.print(
