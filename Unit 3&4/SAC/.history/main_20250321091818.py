@@ -293,10 +293,8 @@ def remove_inventory():
     print_menu_header("REMOVE ITEM")
     console.print(Panel("Enter the name of the item you want to remove:", style="bold"))
 
-    name = Prompt.ask("\n📝 Enter item name (q to go back)")
-    if name == "q":
-        main_menu()
-    elif inventory_manager.remove_item(name):
+    name = Prompt.ask("\n📝 Enter item name")
+    if inventory_manager.remove_item(name):
         console.print("\n✅ Item removed successfully!", style="green")
     else:
         console.print("\n❌ Failed to remove item. Please try again.", style="red")
