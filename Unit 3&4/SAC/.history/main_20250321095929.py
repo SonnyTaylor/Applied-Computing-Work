@@ -237,7 +237,6 @@ def sort_inventory():
 
 
 def add_inventory():
-    """Menu to add inventory"""
     while True:
         print_header()
         print_menu_header("ADD NEW ITEM")
