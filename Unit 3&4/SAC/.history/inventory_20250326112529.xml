@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inventory>
+    <item>
+        <name>Coffee Maker</name>
+        <quantity>3</quantity>
+        <price>79.99</price>
+        <date_added>2024-01-12 09:15:33</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Docking Station</name>
+        <quantity>5</quantity>
+        <price>189.99</price>
+        <date_added>2024-01-25 12:15:40</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>External Drive</name>
+        <quantity>7</quantity>
+        <price>129.99</price>
+        <date_added>2024-01-21 11:35:50</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Headphones</name>
+        <quantity>10</quantity>
+        <price>149.99</price>
+        <date_added>2024-01-13 16:45:12</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Keyboard</name>
+        <quantity>8</quantity>
+        <price>89.99</price>
+        <date_added>2024-01-14 11:22:45</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Laptop</name>
+        <quantity>5</quantity>
+        <price>999.99</price>
+        <date_added>2024-01-15 14:30:22</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Monitor</name>
+        <quantity>4</quantity>
+        <price>299.99</price>
+        <date_added>2024-01-17 10:25:30</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Mouse</name>
+        <quantity>15</quantity>
+        <price>29.99</price>
+        <date_added>2024-01-16 08:05:17</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Phone Charger</name>
+        <quantity>20</quantity>
+        <price>19.99</price>
+        <date_added>2024-01-24 08:30:15</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Printer</name>
+        <quantity>2</quantity>
+        <price>199.99</price>
+        <date_added>2024-01-18 13:40:15</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Speakers</name>
+        <quantity>9</quantity>
+        <price>69.99</price>
+        <date_added>2024-01-22 14:20:05</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Tablet</name>
+        <quantity>3</quantity>
+        <price>449.99</price>
+        <date_added>2024-01-23 16:45:30</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>USB Hub</name>
+        <quantity>12</quantity>
+        <price>39.99</price>
+        <date_added>2024-01-20 09:10:25</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Webcam</name>
+        <quantity>6</quantity>
+        <price>59.99</price>
+        <date_added>2024-01-19 15:55:40</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Wireless Router</name>
+        <quantity>4</quantity>
+        <price>79.99</price>
+        <date_added>2024-01-26 10:50:20</date_added>
+        <in_stock>True</in_stock>
+    </item>
+</inventory> 

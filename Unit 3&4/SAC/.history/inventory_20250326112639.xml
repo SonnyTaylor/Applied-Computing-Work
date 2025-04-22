@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<inventory>
+    <item>
+        <name>Test Laptop</name>
+        <quantity>5</quantity>
+        <price>999.99</price>
+        <date_added>2024-03-20 10:00:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Test Monitor</name>
+        <quantity>3</quantity>
+        <price>299.99</price>
+        <date_added>2024-03-20 10:01:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Test Keyboard</name>
+        <quantity>10</quantity>
+        <price>89.99</price>
+        <date_added>2024-03-20 10:02:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Test Mouse</name>
+        <quantity>15</quantity>
+        <price>29.99</price>
+        <date_added>2024-03-20 10:03:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Test Headphones</name>
+        <quantity>8</quantity>
+        <price>149.99</price>
+        <date_added>2024-03-20 10:04:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Test USB Drive</name>
+        <quantity>20</quantity>
+        <price>39.99</price>
+        <date_added>2024-03-20 10:05:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Test Webcam</name>
+        <quantity>6</quantity>
+        <price>59.99</price>
+        <date_added>2024-03-20 10:06:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+    <item>
+        <name>Test Printer</name>
+        <quantity>2</quantity>
+        <price>199.99</price>
+        <date_added>2024-03-20 10:07:00</date_added>
+        <in_stock>True</in_stock>
+    </item>
+</inventory>
